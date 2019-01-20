@@ -46,9 +46,9 @@ public class ProcessExecutor {
             Problem problem = ProblemSet.Problems.get(submission.ProbmemId);
             submission.Verdict = "Judging ... ... ...";
             String Verdict = "";
-            for (int i = 0; i < problem.Inputs.size(); i++) {
+            for (int i = 0; i < problem.getInputs().size(); i++) {
                 submission.Verdict = "Running on test " + i;
-                Verdict = ExecuteOneCpp(SourceCode, problem.Inputs.get(i), problem.Outputs.get(i), Output, submission.Comment, problem.TimeLimit, submission.TimeTaken, submission.Language);
+                Verdict = ExecuteOneCpp(SourceCode, problem.getInputs().get(i), problem.getOutputs().get(i), Output, submission.Comment, problem.getTimeLimit, submission.TimeTaken, submission.Language);
                 if (!Verdict.equalsIgnoreCase("Accepted")) {
                     break;
                 }

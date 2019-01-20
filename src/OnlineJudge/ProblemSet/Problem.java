@@ -20,30 +20,23 @@ import static jdk.nashorn.internal.objects.NativeRegExp.source;
  * @author MAHDI
  */
 public class Problem implements Serializable{
-    public String Id;
-    public File Statement;// pdf type statement 
-    public String Type;// "static" ,"dynamic","interactive"
-    public File VerifierCode;// if dynamic then verifier cpp 
-    public ArrayList< File > Inputs;
-    public ArrayList< File > Outputs;
-    public int TotalAccepted;
-    public int TotalAttempted;
-    public String Name;
-    public Integer TimeLimit;/// always millisec
-    public Integer MemoryLimit;
+    private String Id;
+    private File Statement;// pdf type statement 
+    private String Type;// "static" ,"dynamic","interactive"
+    private File VerifierCode;// if dynamic then verifier cpp 
+    private ArrayList< File > Inputs;
+    private ArrayList< File > Outputs;
+    private int TotalAccepted;
+    private int TotalAttempted;
+    private String Name;
+    private Integer TimeLimit;/// always millisec
+    private Integer MemoryLimit;
     public Problem(String Id,String Name )
     {
         this.Id=Id;
         this.Name=Name;
     }
 
-    public String getId() {
-        return Id;
-    }
-
-    public String getName() {
-        return Name;
-    }
 
     @Override
     public String toString() {
@@ -164,7 +157,92 @@ public class Problem implements Serializable{
             ex+=s.charAt(i);
         return ex;
     }
-    
-    
-    
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String Id) {
+        this.Id = Id;
+    }
+
+    public File getStatement() {
+        return Statement;
+    }
+
+    public void setStatement(File Statement) {
+        this.Statement = Statement;
+    }
+
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String Type) {
+        this.Type = Type;
+    }
+
+    public File getVerifierCode() {
+        return VerifierCode;
+    }
+
+    public void setVerifierCode(File VerifierCode) {
+        this.VerifierCode = VerifierCode;
+    }
+
+    public ArrayList< File > getInputs() {
+        return Inputs;
+    }
+
+    public void setInputs(ArrayList< File > Inputs) {
+        this.Inputs = Inputs;
+    }
+
+    public ArrayList< File > getOutputs() {
+        return Outputs;
+    }
+
+    public void setOutputs(ArrayList< File > Outputs) {
+        this.Outputs = Outputs;
+    }
+
+    public int getTotalAccepted() {
+        return TotalAccepted;
+    }
+
+    public void setTotalAccepted(int TotalAccepted) {
+        this.TotalAccepted = TotalAccepted;
+    }
+
+    public int getTotalAttempted() {
+        return TotalAttempted;
+    }
+
+    public void setTotalAttempted(int TotalAttempted) {
+        this.TotalAttempted = TotalAttempted;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public Integer getTimeLimit() {
+        return TimeLimit;
+    }
+
+    public void setTimeLimit(Integer TimeLimit) {
+        this.TimeLimit = TimeLimit;
+    }
+
+    public Integer getMemoryLimit() {
+        return MemoryLimit;
+    }
+
+    public void setMemoryLimit(Integer MemoryLimit) {
+        this.MemoryLimit = MemoryLimit;
+    }
 }
