@@ -26,11 +26,12 @@ public class ProcessExecutor {
         try {
             System.out.println("Exexuting ");
 
-            File SourceCode =null;
-            if(submission.Language.equalsIgnoreCase("C++")) 
-                SourceCode=new File("SourceCode.cpp");
-            else 
+            File SourceCode = null;
+            if (submission.Language.equalsIgnoreCase("C++")) {
+                SourceCode = new File("SourceCode.cpp");
+            } else {
                 SourceCode = new File("Solution.java");
+            }
             if (SourceCode.exists()) {
                 SourceCode.delete();
             }
@@ -48,7 +49,7 @@ public class ProcessExecutor {
             String Verdict = "";
             for (int i = 0; i < problem.getInputs().size(); i++) {
                 submission.Verdict = "Running on test " + i;
-                Verdict = ExecuteOneCpp(SourceCode, problem.getInputs().get(i), problem.getOutputs().get(i), Output, submission.Comment, problem.getTimeLimit, submission.TimeTaken, submission.Language);
+                Verdict = ExecuteOneCpp(SourceCode, problem.getInputs().get(i), problem.getOutputs().get(i), Output, submission.Comment, problem.getTimeLimit(), submission.TimeTaken, submission.Language);
                 if (!Verdict.equalsIgnoreCase("Accepted")) {
                     break;
                 }
@@ -100,11 +101,9 @@ public class ProcessExecutor {
             CmdCpp.createNewFile();
         }
         System.out.println("Compiling " + SourceCode.getName());
-        if (Language.equalsIgnoreCase("C++")) {
-            WriteFile("g++ " + SourceCode.getName(), CmdCpp.getName());
-        } else {
-            WriteFile("javac " + SourceCode.getName(), CmdCpp.getName());
-        }
+
+        WriteFile("g++ " + SourceCode.getName(), CmdCpp.getName());
+
         File CmdError = new File("CmdError.txt");
         File CmdOutput = new File("CmdOutput.txt");
 
@@ -115,11 +114,7 @@ public class ProcessExecutor {
 
         File exe = new File("");
 
-        if (Language.equalsIgnoreCase("C++")) {
-            exe = new File("a.exe");
-        } else {
-            exe = new File("Solution.class");
-        }
+        exe = new File("a.exe");
 
         if (exe.exists()) {
             exe.delete();
@@ -136,13 +131,8 @@ public class ProcessExecutor {
         }
 
         ProcessBuilder pb = null;
-        if (Language.equalsIgnoreCase("C++")) {
-            pb = new ProcessBuilder("a.exe");
-        } else {
-            
-            pb = new ProcessBuilder("cmd");
-            File Temp = new File("JavaInput");
-        }
+
+        pb = new ProcessBuilder("a.exe");
 
         /// pb-> c++ programme
         pb.redirectInput(Input);
@@ -151,7 +141,7 @@ public class ProcessExecutor {
 
         long StartTime = System.nanoTime();
         Process pce = pb.start();
-        
+
         boolean finished = pce.waitFor(TimeLimit, TimeUnit.MILLISECONDS);
         System.out.println("programme Finished : " + finished);
         int timelimite = 0;

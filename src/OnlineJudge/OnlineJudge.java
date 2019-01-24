@@ -7,7 +7,9 @@ package OnlineJudge;
 
 import OnlineJudge.ProblemSet.ProblemSet;
 import OnlineJudge.Submission.SubmissionSet;
+import OnlineJudge.User.LocalUser;
 import OnlineJudge.User.UserSet;
+import Server.Server;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,44 +22,55 @@ import javafx.stage.Stage;
  *
  * @author MAHDI
  */
-public class OnlineJudge  extends Application  {
+public class OnlineJudge extends Application {
+
     public static Stage PrimaryStage;
     public static Parent PrimaryRoot;
-    public static AnchorPane Nodes ;
+    public static AnchorPane Nodes;
+
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/OnlineJudgeFXML.fxml"));
+        try {
         
-        Scene scene = new Scene(root,720,600);
+        Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/UserFXML.fxml"));
+
+        Scene scene = new Scene(root, 720, 600);
         stage.getIcons().add(new Image("file:icon.png"));
         stage.setScene(scene);
         stage.show();
-        PrimaryStage=stage;
-        PrimaryRoot=root;
+        PrimaryStage = stage;
+        PrimaryRoot = root;
         stage.setAlwaysOnTop(true);
         stage.setOnCloseRequest((event) -> {
             SubmissionSet.SaveSubmissionSet();
             ProblemSet.SaveProblemSet();
             UserSet.SaveUserSet();
         });
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getCause());
+            e.printStackTrace();
+        }
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    /*    new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
-    */            UserSet.LoadUserSet();
+                UserSet.LoadUserSet();
                 ProblemSet.LoadProblemSet();
                 SubmissionSet.LoadSubmissionSet();
-                
-    //        }
-    //    }.run();
-        
+                    
+            }
+        }).start();
+        new Server();
+        LocalUser.setAdmin();
         launch(args);
-        
+
     }
-    
+
 }

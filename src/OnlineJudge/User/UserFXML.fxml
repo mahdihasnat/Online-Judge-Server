@@ -17,7 +17,7 @@
    <children>
       <HBox layoutX="23.0" layoutY="39.0" prefHeight="35.0" prefWidth="680.0">
          <children>
-            <Button defaultButton="true" mnemonicParsing="false" onAction="#HomeButtonClicked" prefHeight="31.0" prefWidth="68.0" text="Home" />
+            <Button mnemonicParsing="false" onAction="#HomeButtonClicked" prefHeight="31.0" prefWidth="68.0" text="Home" />
             <Button layoutX="80.0" layoutY="10.0" mnemonicParsing="false" onAction="#ContestButtonClicked" prefHeight="31.0" prefWidth="72.0" text="Contest" />
             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#ProblemsetButtonClicked" prefHeight="31.0" prefWidth="103.0" text="Problemset" />
             <Button layoutX="150.0" layoutY="10.0" mnemonicParsing="false" onAction="#SubmitSolutionButtonClicked" prefHeight="31.0" prefWidth="132.0" text="Submit Solution" />
