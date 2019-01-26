@@ -69,6 +69,10 @@ class InputFromClient extends Thread{
                          oos.writeBoolean(true);
                          oos.flush();
                      }
+                     else
+                     {
+                         System.out.println(req);
+                     }
                  }
             }
         } catch (Exception e) {
