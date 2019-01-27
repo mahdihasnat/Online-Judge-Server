@@ -42,6 +42,7 @@ public class AdminFXMLController implements Initializable {
         UserName.setText("Server ");
         LocalUser.setUser(new User("Server"));
         
+        
         // TODO
     }    
 

@@ -30,6 +30,7 @@ public class EditProblemFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        System.out.println("edit problemset ini");
     }    
 
     @FXML

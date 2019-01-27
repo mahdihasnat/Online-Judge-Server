@@ -33,7 +33,55 @@ public class User implements Serializable{
     {
         this.Name = Name;
     }
-
+    
     // solaimon 123
     // mahdi 
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public String getHandle() {
+        return Handle;
+    }
+
+    public void setHandle(String Handle) {
+        this.Handle = Handle;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public String getCountry() {
+        return Country;
+    }
+
+    public void setCountry(String Country) {
+        this.Country = Country;
+    }
+
+    public String getUniversity() {
+        return University;
+    }
+
+    public void setUniversity(String University) {
+        this.University = University;
+    }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
 }
