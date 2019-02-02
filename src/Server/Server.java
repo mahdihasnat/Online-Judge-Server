@@ -5,10 +5,12 @@
  */
 package Server;
 
+import FileUtil.Folder;
 import OnlineJudge.ProblemSet.ProblemSet;
 import OnlineJudge.Submission.SubmissionSet;
 import OnlineJudge.User.User;
 import OnlineJudge.User.UserSet;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -71,10 +73,22 @@ class UpdateClient extends Thread {
                 oos.flush();
                 oos.writeObject(ProblemSet.Problems);
                 oos.flush();
+                /// now problemset er folder 
+                Folder ps= new Folder(new File("ProblemSet"));
+                oos.writeObject(ps);
+                oos.flush();
+                
                 oos.writeObject(false);
                 oos.flush();
                 oos.writeObject(SubmissionSet.Submissions);
                 oos.flush();
+                
+                
+                /// now SubmissionSet er folder 
+                Folder ss= new Folder(new File("SubmissionSet"));
+                oos.writeObject(ss);
+                oos.flush();
+                
                 //System.out.println("data sent");
                 Thread.sleep(500);
             }
