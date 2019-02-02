@@ -26,6 +26,7 @@ public class Submission implements Serializable {
     public Integer Id;
     public String ProblemName;
     public String Comment;
+    transient Thread myThread;
     public Submission(String ProbmemId, String Handle, String Lang, String Code,Integer Id) {
         this.ProbmemId = ProbmemId;
         

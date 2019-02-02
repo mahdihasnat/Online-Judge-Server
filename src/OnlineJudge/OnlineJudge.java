@@ -67,7 +67,8 @@ public class OnlineJudge extends Application {
                     
             }
         }).start();
-        new Server();
+        new Server(11111);
+        new Server(22222);
         LocalUser.setAdmin();
         launch(args);
 

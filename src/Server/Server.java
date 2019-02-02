@@ -5,11 +5,16 @@
  */
 package Server;
 
+import OnlineJudge.ProblemSet.ProblemSet;
+import OnlineJudge.Submission.SubmissionSet;
+import OnlineJudge.User.User;
+import OnlineJudge.User.UserSet;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,23 +22,28 @@ import java.util.logging.Logger;
  *
  * @author Student06
  */
-
-
 public class Server extends Thread {
 
-    public Server() {
+    private int port;
+
+    public Server(int port) {
+        this.port = port;
         start();
     }
 
     @Override
     public void run() {
         try {
-            ServerSocket welcomeSocket = new ServerSocket(12345);
-            System.out.println("Server started");
+            ServerSocket welcomeSocket = new ServerSocket(port);
+            System.out.println("Server started port: " + port);
             while (true) {
                 Socket connectionSocket = welcomeSocket.accept();
-                new InputFromClient(connectionSocket);
-                System.out.println("cleint connected");
+                if (port == 11111) {
+                    new InputFromClient(connectionSocket);
+                } else {
+                    new UpdateClient(connectionSocket);
+                }
+                System.out.println("cleint connected int port: " + port);
             }
         } catch (Exception ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
@@ -42,38 +52,107 @@ public class Server extends Thread {
 
 }
 
-class InputFromClient extends Thread{
+class UpdateClient extends Thread {
 
     private Socket connectionSocket;
 
-    public InputFromClient(Socket s) {
+    public UpdateClient(Socket s) {
         this.connectionSocket = s;
         start();
     }
 
     @Override
     public void run() {
-
+        System.out.println("Update client running port: " + connectionSocket.getLocalPort());
         try {
-            ObjectOutputStream oos= new ObjectOutputStream(connectionSocket.getOutputStream());
-            ObjectInputStream ois=  new ObjectInputStream(connectionSocket.getInputStream());
+            ObjectOutputStream oos = new ObjectOutputStream(connectionSocket.getOutputStream());
             while (true) {
-                 /// kaj kor
-                 if(ois.available()>0)
-                 {
-                     Object req=ois.readObject();
-                     if(req instanceof LoginRequest)
-                     {
-                         LoginRequest lir=(LoginRequest)req;
-                         System.out.println(lir);
-                         oos.writeBoolean(true);
-                         oos.flush();
-                     }
-                     else
-                     {
-                         System.out.println(req);
-                     }
-                 }
+                oos.writeObject(ProblemSet.Problems);
+                oos.flush();
+                oos.writeObject(SubmissionSet.Submissions);
+                oos.flush();
+                //System.out.println("data sent");
+                Thread.sleep(500);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+            e.printStackTrace();
+        } finally {
+            System.out.println("Update client exit");
+        }
+    }
+}
+
+class InputFromClient extends Thread {
+
+    private Socket connectionSocket;
+
+    public InputFromClient(Socket s) {
+        try {
+            this.connectionSocket = s;
+            s.setTcpNoDelay(true);
+            start();
+        } catch (SocketException ex) {
+            Logger.getLogger(InputFromClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void run() {
+        System.out.println("InputFromClient started port:" + connectionSocket.getLocalPort());
+        
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(connectionSocket.getOutputStream());
+            ObjectInputStream ois = new ObjectInputStream(connectionSocket.getInputStream());
+            while (true) {
+                
+                Object req = ois.readObject();
+                if (req == null) {
+                    System.out.println("null");
+                    continue;
+                }
+                if (req instanceof User) {
+                    System.out.println("registar req");
+                    User usr = (User) req;
+                    System.out.println(usr);
+                    if (UserSet.Users.containsValue(usr)) {
+                        oos.writeBoolean(false);
+                        oos.flush();
+                    } else {
+                        oos.writeBoolean(true);
+                        oos.flush();
+                        UserSet.Users.put(usr.getHandle(), usr);
+                   }
+                }
+                
+                if (req instanceof LoginRequest) {
+                    System.out.println("login req paise");
+                    LoginRequest lir = (LoginRequest) req;
+
+                    System.out.println(lir);
+
+                    if (UserSet.Users.containsKey(lir.getUserName())) {
+                        if (lir.getPassword().equals(UserSet.Users.get(lir.getUserName()).getPassword())) {
+                            User usr = UserSet.Users.get(lir.getUserName());
+                            oos.writeBoolean(true);
+                            oos.flush();
+                            oos.writeObject(usr);
+                            oos.flush();
+                            System.out.println("log in ok");
+                        } else {
+                            System.out.println("log in false");
+                            oos.writeBoolean(false);
+                            oos.flush();
+                        }
+                    } else {
+                        System.out.println("log in false");
+                        oos.writeBoolean(false);
+                        oos.flush();
+                    }
+
+                }
+                System.out.println("checking ");
+                
             }
         } catch (Exception e) {
 

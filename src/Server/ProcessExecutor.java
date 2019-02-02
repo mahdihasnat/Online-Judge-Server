@@ -172,7 +172,7 @@ public class ProcessExecutor extends Thread{
             String Verdict = "";
             for (int i = 0; i < problem.getInputs().size(); i++) {
                 submission.Verdict = "Running on test " + i;
-                Verdict = RunCpp(submission,problem.getInputs().get(i), problem.getOutputs().get(i),SourceCode,Output);
+                Verdict = RunCpp(submission,problem,problem.getInputs().get(i), problem.getOutputs().get(i),SourceCode,Output);
                 if (!Verdict.equalsIgnoreCase("Accepted")) {
                     break;
                 }
@@ -196,7 +196,7 @@ public class ProcessExecutor extends Thread{
         }
     }
     
-    public static String RunCpp(Submission submission,File Input,File Output,File SourceCode,File ReirectOutput) throws Exception
+    public static String RunCpp(Submission submission,Problem problem,File Input,File Output,File SourceCode,File ReirectOutput) throws Exception
     {
         ProcessBuilder cmd = new ProcessBuilder("cmd");
 
@@ -243,7 +243,7 @@ public class ProcessExecutor extends Thread{
         long StartTime = System.nanoTime();
         Process pce = pb.start();
 
-        boolean finished = pce.waitFor(Long.parseLong(submission.Time), TimeUnit.MILLISECONDS);
+        boolean finished = pce.waitFor(problem.getTimeLimit().longValue(), TimeUnit.MILLISECONDS);
         System.out.println("programme Finished : " + finished);
         int timelimite = 0;
         if (!finished) {
@@ -255,8 +255,8 @@ public class ProcessExecutor extends Thread{
         long StopTime = System.nanoTime();
         long TimeElapsed = StopTime - StartTime;
         System.out.println("Time taken " + TimeElapsed+" nano sec");
-        Long timeTaken = max(Long.parseLong(submission.TimeTaken) * 100000, TimeElapsed);
-        timeTaken = timeTaken / 100000;
+        Long timeTaken = max(Long.parseLong(submission.TimeTaken) * 1000000, TimeElapsed);
+        timeTaken = timeTaken / 1000000;
         submission.TimeTaken = String.valueOf(timeTaken);
         int ExitValue = pce.exitValue();
         System.out.println("Exit value " + ExitValue);

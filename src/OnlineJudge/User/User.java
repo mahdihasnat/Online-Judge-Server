@@ -18,7 +18,7 @@ public class User implements Serializable{
     String Country;
     String University;
     String Password;
-
+    transient Thread myThread;
     public User(String Name, String Handle, String Email, String Country, String University, String Password) {
         if(Country.equals("")) Country="Bangladesh";
         if(University.equals("")) University="BUET";
@@ -84,4 +84,10 @@ public class User implements Serializable{
     public void setPassword(String Password) {
         this.Password = Password;
     }
+
+    @Override
+    public String toString() {
+        return "User{" + "Name=" + Name + ", Handle=" + Handle + ", Email=" + Email + ", Country=" + Country + ", University=" + University + ", Password=" + Password + ", myThread=" + myThread + '}';
+    }
+    
 }
