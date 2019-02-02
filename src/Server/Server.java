@@ -67,7 +67,11 @@ class UpdateClient extends Thread {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(connectionSocket.getOutputStream());
             while (true) {
+                oos.writeObject(true);
+                oos.flush();
                 oos.writeObject(ProblemSet.Problems);
+                oos.flush();
+                oos.writeObject(false);
                 oos.flush();
                 oos.writeObject(SubmissionSet.Submissions);
                 oos.flush();
@@ -86,7 +90,7 @@ class UpdateClient extends Thread {
 class InputFromClient extends Thread {
 
     private Socket connectionSocket;
-
+    private ObjectOutputStream oos;
     public InputFromClient(Socket s) {
         try {
             this.connectionSocket = s;
@@ -96,13 +100,17 @@ class InputFromClient extends Thread {
             Logger.getLogger(InputFromClient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    void sendObject(Object o) throws IOException
+    {
+        oos.writeObject(o); 
+        oos.flush();
+    }
     @Override
     public void run() {
         System.out.println("InputFromClient started port:" + connectionSocket.getLocalPort());
         
         try {
-            ObjectOutputStream oos = new ObjectOutputStream(connectionSocket.getOutputStream());
+            oos = new ObjectOutputStream(connectionSocket.getOutputStream());
             ObjectInputStream ois = new ObjectInputStream(connectionSocket.getInputStream());
             while (true) {
                 
@@ -115,12 +123,11 @@ class InputFromClient extends Thread {
                     System.out.println("registar req");
                     User usr = (User) req;
                     System.out.println(usr);
-                    if (UserSet.Users.containsValue(usr)) {
-                        oos.writeBoolean(false);
-                        oos.flush();
+                    if (UserSet.Users.containsKey(usr.getHandle())) {
+                        sendObject(false);
+                        System.out.println("User already registered with same handle");
                     } else {
-                        oos.writeBoolean(true);
-                        oos.flush();
+                        sendObject(true);
                         UserSet.Users.put(usr.getHandle(), usr);
                    }
                 }
@@ -128,26 +135,25 @@ class InputFromClient extends Thread {
                 if (req instanceof LoginRequest) {
                     System.out.println("login req paise");
                     LoginRequest lir = (LoginRequest) req;
-
+                    
                     System.out.println(lir);
 
                     if (UserSet.Users.containsKey(lir.getUserName())) {
                         if (lir.getPassword().equals(UserSet.Users.get(lir.getUserName()).getPassword())) {
                             User usr = UserSet.Users.get(lir.getUserName());
-                            oos.writeBoolean(true);
-                            oos.flush();
-                            oos.writeObject(usr);
-                            oos.flush();
+                            sendObject(true);
+                            sendObject(usr);
+                            
                             System.out.println("log in ok");
                         } else {
                             System.out.println("log in false");
-                            oos.writeBoolean(false);
-                            oos.flush();
+                            sendObject(false);
+                            
                         }
                     } else {
                         System.out.println("log in false");
-                        oos.writeBoolean(false);
-                        oos.flush();
+                        sendObject(false);
+                        
                     }
 
                 }
