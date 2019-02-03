@@ -94,13 +94,8 @@ class UpdateClient extends Thread {
                 oos.writeObject(ss);
                 oos.flush();
                 
-                //System.out.println("data sent");
-<<<<<<< HEAD
-                
-=======
                 ois.readObject();
                 oos.reset();
->>>>>>> 840d9f87edb6a3808990d0b88705bddedf17cf88
             }
         } catch (Exception e) {
             System.out.println(e.getCause());

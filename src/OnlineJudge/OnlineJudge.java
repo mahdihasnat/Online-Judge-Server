@@ -40,10 +40,7 @@ public class OnlineJudge extends Application {
         stage.show();
         PrimaryStage = stage;
         PrimaryRoot = root;
-<<<<<<< HEAD
-        
-=======
->>>>>>> 840d9f87edb6a3808990d0b88705bddedf17cf88
+
         stage.setOnCloseRequest((event) -> {
             SubmissionSet.SaveSubmissionSet();
             ProblemSet.SaveProblemSet();
