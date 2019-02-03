@@ -1,6 +1,8 @@
-#include <iostream>
+#include<bits/stdc++.h>
+using namespace std ;
+int main()
+{
 
-<<<<<<< HEAD
     int t,a,b;
     cin>>t;
     while(t--)
@@ -9,11 +11,4 @@
         cout<<a+b<<endl;
     }
 }
-=======
-using namespace std;
->>>>>>> 840d9f87edb6a3808990d0b88705bddedf17cf88
 
-int main() {
-	
-	return 0;
-}

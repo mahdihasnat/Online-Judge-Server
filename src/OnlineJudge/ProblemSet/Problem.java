@@ -60,12 +60,12 @@ public class Problem implements Serializable {
             this.TotalInputs = Inputs.size();
             int n = 1;
             for (File f : Inputs) {
-                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Input" + n), f);
+                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Input" + n+".txt"), f);
             }
 
             n = 1;
             for (File f : Outputs) {
-                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Output" + n), f);
+                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Output" + n+".txt"), f);
             }
 
             this.Name = Name;
@@ -103,7 +103,7 @@ public class Problem implements Serializable {
             this.TotalInputs = Inputs.size();
             int n = 1;
             for (File f : Inputs) {
-                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Input" + n), f);
+                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Input" + n+".txt"), f);
             }
 
             this.VerifierCode=VerifierCode.getName();

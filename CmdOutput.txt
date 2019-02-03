@@ -1,6 +1,6 @@
-Microsoft Windows [Version 10.0.17134.523]
+Microsoft Windows [Version 10.0.17134.471]
 (c) 2018 Microsoft Corporation. All rights reserved.
 
-C:\Users\iRounge01\Documents\GitHub\Online-Judge-Server>g++ SourceCode.cpp
+C:\Users\MAHDI\Documents\GitHub\Online-Judge-Server>javac Solution.java
 
-C:\Users\iRounge01\Documents\GitHub\Online-Judge-Server>
+C:\Users\MAHDI\Documents\GitHub\Online-Judge-Server>

@@ -187,7 +187,12 @@ class InputFromClient extends Thread {
                 
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
+            
+        }
+        finally
+        {
+            System.out.println("Input client exit ");
         }
 
     }
