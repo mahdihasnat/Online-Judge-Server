@@ -140,7 +140,7 @@ public class AddProblemFXMLController implements Initializable {
         else 
           p=  new Problem(pId,pStatement,pType,pVerifierCode,pInputs,pName,pTimeLimit,pMemoryLimit);
         ProblemSet.Problems.put(pId, p);
-        //ProblemSet.SaveProblemSet();
+        ProblemSet.SaveProblemSet();
     }
 
     @FXML

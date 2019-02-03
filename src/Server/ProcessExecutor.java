@@ -18,22 +18,26 @@ import java.util.concurrent.TimeUnit;
  *
  * @author Student06
  */
-public class ProcessExecutor extends Thread{
+public class ProcessExecutor extends Thread {
+
     Submission submission;
     int ExitValue;
+    static final String FileSeparator = System.getProperty("file.separator");
 
     public ProcessExecutor(Submission submission) {
-        this.submission=submission;
+        this.submission = submission;
         start();
     }
 
     static void WriteFile(String Code, String FileName) throws FileNotFoundException {
-        
-        File f=new File(FileName);
-        if(!f.exists()) try {
-            f.createNewFile();
-        } catch (IOException ex) {
-            Logger.getLogger(ProcessExecutor.class.getName()).log(Level.SEVERE, null, ex);
+
+        File f = new File(FileName);
+        if (!f.exists()) {
+            try {
+                f.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ProcessExecutor.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         System.out.println("In write file");
         System.out.println(Code);
@@ -70,7 +74,7 @@ public class ProcessExecutor extends Thread{
         if (!CmdCpp.exists()) {
             CmdCpp.createNewFile();
         }
-        System.out.println("Compiling " + SourceCode.getName());
+        //System.out.println("Compiling " + SourceCode.getName());
 
         WriteFile("g++ " + SourceCode.getName(), CmdCpp.getName());
 
@@ -90,10 +94,10 @@ public class ProcessExecutor extends Thread{
             exe.delete();
         }
         // start the process 
-        System.out.println("Compiling ");
+        //System.out.println("Compiling ");
         Process pc = cmd.start();
         int res = pc.waitFor();
-        System.out.println("Compilation ok");
+        //System.out.println("Compilation ok");
 
         if (!exe.exists()) {
             Error = ReadFile(CmdError);
@@ -113,7 +117,7 @@ public class ProcessExecutor extends Thread{
         Process pce = pb.start();
 
         boolean finished = pce.waitFor(TimeLimit, TimeUnit.MILLISECONDS);
-        System.out.println("programme Finished : " + finished);
+        //System.out.println("programme Finished : " + finished);
         int timelimite = 0;
         if (!finished) {
             timelimite = 1;
@@ -125,12 +129,12 @@ public class ProcessExecutor extends Thread{
         }
         long StopTime = System.nanoTime();
         long TimeElapsed = StopTime - StartTime;
-        System.out.println("Time taken " + TimeElapsed);
+        //System.out.println("Time taken " + TimeElapsed);
         Long timeTaken = max(Long.parseLong(TimeTaken) * 1000000, TimeElapsed);
         timeTaken = timeTaken / 1000000;
         TimeTaken = String.valueOf(timeTaken);
         int ExitValue = pce.exitValue();
-        System.out.println("Exit value " + ExitValue);
+        //System.out.println("Exit value " + ExitValue);
         String Verdict = "";
         if (ReadFile(Output).equals(ReadFile(ReirectOutput))) {
             Verdict = "Accepted";
@@ -142,62 +146,57 @@ public class ProcessExecutor extends Thread{
         } else {
             Verdict = "Wrong Answer";
         }
-        System.out.println("Exit execxute ones");
+        //System.out.println("Exit execxute ones");
         return Verdict;
     }
 
     @Override
     public void run() {
         try {
-            System.out.println("Exexuting ");
+            //System.out.println("Exexuting ");
 
             File SourceCode = null;
             if (submission.Language.equalsIgnoreCase("C++")) {
                 SourceCode = new File("SourceCode.cpp");
-                
+
                 if (SourceCode.exists()) {
-                SourceCode.delete();
-            }
-            SourceCode.createNewFile();
-            WriteFile(submission.Code, SourceCode.getName());
-
-            File Output = new File("Output.txt");
-            if (Output.exists()) {
-                Output.delete();
-            }
-            Output.createNewFile();
-
-            Problem problem = ProblemSet.Problems.get(submission.ProbmemId);
-            submission.Verdict = "Judging ... ... ...";
-            String Verdict = "";
-            for (int i = 0; i < problem.getInputs().size(); i++) {
-                submission.Verdict = "Running on test " + i;
-                Verdict = RunCpp(submission,problem,problem.getInputs().get(i), problem.getOutputs().get(i),SourceCode,Output);
-                if (!Verdict.equalsIgnoreCase("Accepted")) {
-                    break;
+                    SourceCode.delete();
                 }
-            }
-            submission.Verdict = Verdict;
-            System.out.println(submission);
+                SourceCode.createNewFile();
+                WriteFile(submission.Code, SourceCode.getName());
+
+                File Output = new File("Output.txt");
+                if (Output.exists()) {
+                    Output.delete();
+                }
+                Output.createNewFile();
+
+                Problem problem = ProblemSet.Problems.get(submission.ProbmemId);
+                submission.Verdict = "Judging ... ... ...";
+                String Verdict = "";
                 
-            }
-            else 
-            {
+                String Path_plus_separator= Problem.path.getAbsolutePath() + FileSeparator +problem.getId()+FileSeparator;
+                for (int i = 1; i <= problem.getTotalInputs(); i++) {
+                    submission.Verdict = "Running on test " + i;
+                    Verdict = RunCpp(submission, problem,  new File(Path_plus_separator + "Input" + i), new File(Path_plus_separator+ "Output" + i), SourceCode, Output);
+                    if (!Verdict.equalsIgnoreCase("Accepted")) {
+                        break;
+                    }
+                }
+                submission.Verdict = Verdict;
+                //System.out.println(submission);
+
+            } else {
                 System.out.println("Java not added");
             }
-                
-                
-            
-            
 
         } catch (Exception ex) {
             System.out.println(ex.getCause());
             Logger.getLogger(ProcessExecutor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public static String RunCpp(Submission submission,Problem problem,File Input,File Output,File SourceCode,File ReirectOutput) throws Exception
-    {
+
+    public static String RunCpp(Submission submission, Problem problem, File Input, File Output, File SourceCode, File ReirectOutput) throws Exception {
         ProcessBuilder cmd = new ProcessBuilder("cmd");
 
         // take all commands as input in a text file 
@@ -217,23 +216,23 @@ public class ProcessExecutor extends Thread{
         cmd.redirectOutput(CmdOutput);
         cmd.redirectError(CmdError);
 
-        File       exe = new File("a.exe");
+        File exe = new File("a.exe");
         if (exe.exists()) {
             exe.delete();
         }
-        
+
         // start the process 
         System.out.println("Compiling ");
         Process pc = cmd.start();
         int res = pc.waitFor();
         System.out.println("Compilation ok");
-        
+
         if (!exe.exists()) {
             submission.Comment = ReadFile(CmdError);
             return "Compilation Error";
         }
 
-        ProcessBuilder       pb = new ProcessBuilder("a.exe");
+        ProcessBuilder pb = new ProcessBuilder("a.exe");
 
         /// pb-> c++ programme
         pb.redirectInput(Input);
@@ -250,11 +249,13 @@ public class ProcessExecutor extends Thread{
             timelimite = 1;
             pce.destroy();
         }
-        if(submission.TimeTaken.equals("")) submission.TimeTaken="0";
-        
+        if (submission.TimeTaken.equals("")) {
+            submission.TimeTaken = "0";
+        }
+
         long StopTime = System.nanoTime();
         long TimeElapsed = StopTime - StartTime;
-        System.out.println("Time taken " + TimeElapsed+" nano sec");
+        System.out.println("Time taken " + TimeElapsed + " nano sec");
         Long timeTaken = max(Long.parseLong(submission.TimeTaken) * 1000000, TimeElapsed);
         timeTaken = timeTaken / 1000000;
         submission.TimeTaken = String.valueOf(timeTaken);
@@ -274,6 +275,5 @@ public class ProcessExecutor extends Thread{
         System.out.println("Exit execxute ones");
         return Verdict;
     }
-    
-    
+
 }

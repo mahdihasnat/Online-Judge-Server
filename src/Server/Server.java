@@ -90,7 +90,7 @@ class UpdateClient extends Thread {
                 oos.flush();
                 
                 //System.out.println("data sent");
-                Thread.sleep(500);
+                
             }
         } catch (Exception e) {
             System.out.println(e.getCause());

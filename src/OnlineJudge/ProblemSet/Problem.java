@@ -19,142 +19,126 @@ import static jdk.nashorn.internal.objects.NativeRegExp.source;
  *
  * @author MAHDI
  */
-public class Problem implements Serializable{
+public class Problem implements Serializable {
+
     private String Id;
-    private File Statement;// pdf type statement 
+    private String Name;
+    private String Statement;// pdf type statement 
     private String Type;// "static" ,"dynamic","interactive"
-    private File VerifierCode;// if dynamic then verifier cpp 
-    private ArrayList< File > Inputs;
-    private ArrayList< File > Outputs;
+    private String VerifierCode;// if dynamic then verifier cpp 
+    private Integer TotalInputs;
     private int TotalAccepted;
     private int TotalAttempted;
-    private String Name;
     private Integer TimeLimit;/// always millisec
     private Integer MemoryLimit;
-    public Problem(String Id,String Name )
-    {
-        this.Id=Id;
-        this.Name=Name;
-    }
 
-
-    @Override
-    public String toString() {
-        return "Problem{" + "Id=" + Id + ", Statement=" + Statement + ", Type=" + Type + ", VerifierCode=" + VerifierCode + ", Inputs=" + Inputs + ", Outputs=" + Outputs + ", TotalAccepted=" + TotalAccepted + ", TotalAttempted=" + TotalAttempted + ", Name=" + Name + ", TimeLimit=" + TimeLimit + ", MemoryLimit=" + MemoryLimit + '}';
-    }
-    static final File path=new File("ProblemSet");
-    static final String FileSeparator=System.getProperty("file.separator");
-    public Problem(String Id, File Statement, String Type, File VerifierCode, ArrayList<File> Inputs, String Name, Integer TimeLimit, Integer MemoryLimit)  {
-        try {
-        System.out.println("Problem constructor");
-        if(!path.exists()) 
-        {
-            if(!path.mkdirs())
-            {
-                System.out.println("Problemse dir not created");
-            }
-        }
-        File Path=new File(path.getAbsolutePath()+FileSeparator+Id);
-        if(!Path.exists()) 
-        {
-            if(!Path.mkdirs())
-            {
-                System.out.println("Problems folder dir not created");
-            }
-        }
-        this.Id = Id;
-        this.Statement=CopyFiles(Statement,"Statement",Path);
-        System.out.println("Statement copied");
-        this.Type = Type;
-        
-        this.VerifierCode=CopyFiles(VerifierCode,"VerifierCode",Path);
-        this.Inputs= new ArrayList<File>();
-        int n=1;
-        for(File f:Inputs)
-        {
-            this.Inputs.add(CopyFiles(VerifierCode,"Input"+(n++),Path));
-        }
-        
-        this.Name = Name;
-        this.TimeLimit = TimeLimit;
-        this.MemoryLimit = MemoryLimit;
-        }
-        catch(Exception e)
-        {
-            System.out.println(e.getCause());
-            e.printStackTrace();
-        }
-    }
-
+    public static final File path = new File("ProblemSet");
+    static final String FileSeparator = System.getProperty("file.separator");
+    
     public Problem(String Id, File Statement, String Type, ArrayList<File> Inputs, ArrayList<File> Outputs, String Name, Integer TimeLimit, Integer MemoryLimit) {
         try {
-        System.out.println("Problem constructor");
-        if(!path.exists()) 
-        {
-            if(!path.mkdirs())
-            {
-                System.out.println("Problemse dir not created");
+            System.out.println("Problem constructor");
+            if (!path.exists()) {
+                if (!path.mkdirs()) {
+                    System.out.println("Problemse dir not created");
+                }
             }
-        }
-        File Path=new File(path.getAbsolutePath()+FileSeparator+Id);
-        if(!Path.exists()) 
-        {
-            if(!Path.mkdirs())
-            {
-                System.out.println("Problems folder dir not created");
+            File Path = new File(path.getAbsolutePath() + FileSeparator + Id);
+            if (!Path.exists()) {
+                if (!Path.mkdirs()) {
+                    System.out.println("Problems folder dir not created");
+                }
             }
-        }
-        this.Id = Id;
-        this.Statement=CopyFiles(Statement,"Statement",Path);
-        System.out.println("Statement copied");
-        this.Type = Type;
-        
-        this.Inputs= new ArrayList<File>();
-        int n=1;
-        for(File f:Inputs)
-        {
-            this.Inputs.add(CopyFiles(f,"Input"+(n++),Path));
-        }
-        
-        this.Outputs= new ArrayList<File>();
-         n=1;
-        for(File f:Outputs)
-        {
-            this.Outputs.add(CopyFiles(f,"Output"+(n++),Path));
-        }
-        
-        this.Name = Name;
-        this.TimeLimit = TimeLimit;
-        this.MemoryLimit = MemoryLimit;
-        }
-        catch(Exception e)
-        {
+            this.Id = Id;
+            this.Statement = Statement.getName();
+            CopyFile(new File(Path.getAbsolutePath() + FileSeparator + this.Statement), Statement);
+
+            System.out.println("Statement copied");
+
+            this.Type = Type;
+
+            this.TotalInputs = Inputs.size();
+            int n = 1;
+            for (File f : Inputs) {
+                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Input" + n), f);
+            }
+
+            n = 1;
+            for (File f : Outputs) {
+                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Output" + n), f);
+            }
+
+            this.Name = Name;
+            this.TimeLimit = TimeLimit;
+            this.MemoryLimit = MemoryLimit;
+        } catch (Exception e) {
             System.out.println(e.getCause());
             e.printStackTrace();
         }
     }
-    static File CopyFiles(File src,String field,File Path)
-    {
-        try {
-            File dest = new File(Path.getAbsolutePath()+FileSeparator+field+GetExtension(src.getAbsolutePath()));
-            if(!dest.exists())
-                dest.createNewFile();
-            Files.copy(src.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("File created: "+dest.getAbsolutePath());
-            return dest;
-        } catch (Exception ex) {
-            System.out.println(ex.getCause());
-            }
-       
-        return null;
-    }
     
-    static String GetExtension(String s)
-    {
-        int id=s.lastIndexOf('.');
-        String ex="";
-        for(int i=id;i<s.length();i++)
-            ex+=s.charAt(i);
+    
+    public Problem(String Id, File Statement, String Type,File VerifierCode, ArrayList<File> Inputs, String Name, Integer TimeLimit, Integer MemoryLimit) {
+        try {
+            System.out.println("Problem constructor");
+            if (!path.exists()) {
+                if (!path.mkdirs()) {
+                    System.out.println("Problemse dir not created");
+                }
+            }
+            File Path = new File(path.getAbsolutePath() + FileSeparator + Id);
+            if (!Path.exists()) {
+                if (!Path.mkdirs()) {
+                    System.out.println("Problems folder dir not created");
+                }
+            }
+            this.Id = Id;
+            this.Statement = Statement.getName();
+            CopyFile(new File(Path.getAbsolutePath() + FileSeparator + this.Statement), Statement);
+
+            System.out.println("Statement copied");
+
+            this.Type = Type;
+
+            this.TotalInputs = Inputs.size();
+            int n = 1;
+            for (File f : Inputs) {
+                CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Input" + n), f);
+            }
+
+            this.VerifierCode=VerifierCode.getName();
+            CopyFile(new File (Path.getAbsoluteFile()+FileSeparator+this.VerifierCode), VerifierCode);
+            this.Name = Name;
+            this.TimeLimit = TimeLimit;
+            this.MemoryLimit = MemoryLimit;
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+            e.printStackTrace();
+        }
+    }
+
+    
+    static void CopyFile(File to, File from) {
+        try {
+            if (!to.exists()) {
+                try {
+                    to.createNewFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(Problem.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            Files.copy(from.toPath(), to.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ex) {
+            Logger.getLogger(Problem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    static String GetExtension(String s) {
+        int id = s.lastIndexOf('.');
+        String ex = "";
+        for (int i = id; i < s.length(); i++) {
+            ex += s.charAt(i);
+        }
         return ex;
     }
 
@@ -166,11 +150,19 @@ public class Problem implements Serializable{
         this.Id = Id;
     }
 
-    public File getStatement() {
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public String getStatement() {
         return Statement;
     }
 
-    public void setStatement(File Statement) {
+    public void setStatement(String Statement) {
         this.Statement = Statement;
     }
 
@@ -182,28 +174,20 @@ public class Problem implements Serializable{
         this.Type = Type;
     }
 
-    public File getVerifierCode() {
+    public String getVerifierCode() {
         return VerifierCode;
     }
 
-    public void setVerifierCode(File VerifierCode) {
+    public void setVerifierCode(String VerifierCode) {
         this.VerifierCode = VerifierCode;
     }
 
-    public ArrayList< File > getInputs() {
-        return Inputs;
+    public Integer getTotalInputs() {
+        return TotalInputs;
     }
 
-    public void setInputs(ArrayList< File > Inputs) {
-        this.Inputs = Inputs;
-    }
-
-    public ArrayList< File > getOutputs() {
-        return Outputs;
-    }
-
-    public void setOutputs(ArrayList< File > Outputs) {
-        this.Outputs = Outputs;
+    public void setTotalInputs(Integer TotalInputs) {
+        this.TotalInputs = TotalInputs;
     }
 
     public int getTotalAccepted() {
@@ -222,14 +206,6 @@ public class Problem implements Serializable{
         this.TotalAttempted = TotalAttempted;
     }
 
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
     public Integer getTimeLimit() {
         return TimeLimit;
     }
@@ -245,4 +221,6 @@ public class Problem implements Serializable{
     public void setMemoryLimit(Integer MemoryLimit) {
         this.MemoryLimit = MemoryLimit;
     }
+
+
 }

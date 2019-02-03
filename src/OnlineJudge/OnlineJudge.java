@@ -40,7 +40,7 @@ public class OnlineJudge extends Application {
         stage.show();
         PrimaryStage = stage;
         PrimaryRoot = root;
-        stage.setAlwaysOnTop(true);
+        
         stage.setOnCloseRequest((event) -> {
             SubmissionSet.SaveSubmissionSet();
             ProblemSet.SaveProblemSet();
