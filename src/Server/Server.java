@@ -7,6 +7,7 @@ package Server;
 
 import FileUtil.Folder;
 import OnlineJudge.ProblemSet.ProblemSet;
+import OnlineJudge.Submission.Submission;
 import OnlineJudge.Submission.SubmissionSet;
 import OnlineJudge.User.User;
 import OnlineJudge.User.UserSet;
@@ -67,7 +68,9 @@ class UpdateClient extends Thread {
     public void run() {
         System.out.println("Update client running port: " + connectionSocket.getLocalPort());
         try {
+            
             ObjectOutputStream oos = new ObjectOutputStream(connectionSocket.getOutputStream());
+            ObjectInputStream ois =  new ObjectInputStream(connectionSocket.getInputStream());
             while (true) {
                 oos.writeObject(true);
                 oos.flush();
@@ -80,6 +83,8 @@ class UpdateClient extends Thread {
                 
                 oos.writeObject(false);
                 oos.flush();
+                
+                
                 oos.writeObject(SubmissionSet.Submissions);
                 oos.flush();
                 
@@ -90,7 +95,12 @@ class UpdateClient extends Thread {
                 oos.flush();
                 
                 //System.out.println("data sent");
+<<<<<<< HEAD
                 
+=======
+                ois.readObject();
+                oos.reset();
+>>>>>>> 840d9f87edb6a3808990d0b88705bddedf17cf88
             }
         } catch (Exception e) {
             System.out.println(e.getCause());
@@ -146,7 +156,7 @@ class InputFromClient extends Thread {
                    }
                 }
                 
-                if (req instanceof LoginRequest) {
+                else if (req instanceof LoginRequest) {
                     System.out.println("login req paise");
                     LoginRequest lir = (LoginRequest) req;
                     
@@ -170,6 +180,13 @@ class InputFromClient extends Thread {
                         
                     }
 
+                }
+                else if(req instanceof Submission )
+                {
+                    Submission sm= (Submission) req;
+                    sm.setId(SubmissionSet.TotalSubmissions++);
+                    SubmissionSet.Submissions.put(sm.getId(), sm);
+                    new ProcessExecutor(sm);
                 }
                 System.out.println("checking ");
                 

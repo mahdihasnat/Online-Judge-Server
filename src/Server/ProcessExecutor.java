@@ -39,9 +39,9 @@ public class ProcessExecutor extends Thread {
                 Logger.getLogger(ProcessExecutor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        System.out.println("In write file");
-        System.out.println(Code);
-        System.out.println(FileName);
+        //System.out.println("In write file");
+        //System.out.println(Code);
+        //System.out.println(FileName);
         PrintWriter out = new PrintWriter(FileName);
         out.println(Code);
         out.close();
@@ -55,7 +55,7 @@ public class ProcessExecutor extends Thread {
             int c = 1;
             while ((c = bir.read()) != -1) {
 
-                System.out.print((char) c);
+                //System.out.print((char) c);
                 src += Character.toString((char) c);
             }
         } catch (Exception ex) {

@@ -39,8 +39,47 @@ public class Submission implements Serializable {
         TimeTaken="";
         MemoryTaken="";
         this.Id=Id;
-        new ProcessExecutor(this);
         SubmissionSet.TotalSubmissions++;
+    }
+
+    public void setProbmemId(String ProbmemId) {
+        this.ProbmemId = ProbmemId;
+    }
+
+    public void setHandle(String Handle) {
+        this.Handle = Handle;
+    }
+
+    public void setLanguage(String Language) {
+        this.Language = Language;
+    }
+
+    public void setCode(String Code) {
+        this.Code = Code;
+    }
+
+    public void setVerdict(String Verdict) {
+        this.Verdict = Verdict;
+    }
+
+    public void setTime(String Time) {
+        this.Time = Time;
+    }
+
+    public void setTimeTaken(String TimeTaken) {
+        this.TimeTaken = TimeTaken;
+    }
+
+    public void setMemoryTaken(String MemoryTaken) {
+        this.MemoryTaken = MemoryTaken;
+    }
+
+    public void setId(Integer Id) {
+        this.Id = Id;
+    }
+
+    public void setProblemName(String ProblemName) {
+        this.ProblemName = ProblemName;
     }
 
     public String getProbmemId() {
@@ -81,6 +120,14 @@ public class Submission implements Serializable {
 
     public String getProblemName() {
         return ProblemName;
+    }
+
+    public String getComment() {
+        return Comment;
+    }
+
+    public void setComment(String Comment) {
+        this.Comment = Comment;
     }
 
     @Override
