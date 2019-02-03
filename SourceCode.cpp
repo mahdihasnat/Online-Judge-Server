@@ -1,14 +1,8 @@
-#include<bits/stdc++.h>
-using namespace std ;
-int main()
-{
+#include <iostream>
 
-    int t,a,b;
-    cin>>t;
-    while(t--)
-    {
-        cin>>a>>b;
-        cout<<a+b;
-    }
+using namespace std;
+
+int main() {
+	dsaf
+	return 0;
 }
-

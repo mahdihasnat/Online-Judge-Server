@@ -68,6 +68,7 @@ class UpdateClient extends Thread {
         System.out.println("Update client running port: " + connectionSocket.getLocalPort());
         try {
             ObjectOutputStream oos = new ObjectOutputStream(connectionSocket.getOutputStream());
+            ObjectInputStream ois =  new ObjectInputStream(connectionSocket.getInputStream());
             while (true) {
                 oos.writeObject(true);
                 oos.flush();
@@ -90,7 +91,8 @@ class UpdateClient extends Thread {
                 oos.flush();
                 
                 //System.out.println("data sent");
-                Thread.sleep(500);
+                ois.readObject();
+                
             }
         } catch (Exception e) {
             System.out.println(e.getCause());

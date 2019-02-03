@@ -35,9 +35,9 @@ public class ProcessExecutor extends Thread{
         } catch (IOException ex) {
             Logger.getLogger(ProcessExecutor.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println("In write file");
-        System.out.println(Code);
-        System.out.println(FileName);
+        //System.out.println("In write file");
+        //System.out.println(Code);
+        //System.out.println(FileName);
         PrintWriter out = new PrintWriter(FileName);
         out.println(Code);
         out.close();
@@ -51,7 +51,7 @@ public class ProcessExecutor extends Thread{
             int c = 1;
             while ((c = bir.read()) != -1) {
 
-                System.out.print((char) c);
+                //System.out.print((char) c);
                 src += Character.toString((char) c);
             }
         } catch (Exception ex) {
@@ -70,7 +70,7 @@ public class ProcessExecutor extends Thread{
         if (!CmdCpp.exists()) {
             CmdCpp.createNewFile();
         }
-        System.out.println("Compiling " + SourceCode.getName());
+        //System.out.println("Compiling " + SourceCode.getName());
 
         WriteFile("g++ " + SourceCode.getName(), CmdCpp.getName());
 
@@ -90,10 +90,10 @@ public class ProcessExecutor extends Thread{
             exe.delete();
         }
         // start the process 
-        System.out.println("Compiling ");
+        //System.out.println("Compiling ");
         Process pc = cmd.start();
         int res = pc.waitFor();
-        System.out.println("Compilation ok");
+        //System.out.println("Compilation ok");
 
         if (!exe.exists()) {
             Error = ReadFile(CmdError);
@@ -113,7 +113,7 @@ public class ProcessExecutor extends Thread{
         Process pce = pb.start();
 
         boolean finished = pce.waitFor(TimeLimit, TimeUnit.MILLISECONDS);
-        System.out.println("programme Finished : " + finished);
+        //System.out.println("programme Finished : " + finished);
         int timelimite = 0;
         if (!finished) {
             timelimite = 1;
@@ -125,12 +125,12 @@ public class ProcessExecutor extends Thread{
         }
         long StopTime = System.nanoTime();
         long TimeElapsed = StopTime - StartTime;
-        System.out.println("Time taken " + TimeElapsed);
+        //System.out.println("Time taken " + TimeElapsed);
         Long timeTaken = max(Long.parseLong(TimeTaken) * 1000000, TimeElapsed);
         timeTaken = timeTaken / 1000000;
         TimeTaken = String.valueOf(timeTaken);
         int ExitValue = pce.exitValue();
-        System.out.println("Exit value " + ExitValue);
+        //System.out.println("Exit value " + ExitValue);
         String Verdict = "";
         if (ReadFile(Output).equals(ReadFile(ReirectOutput))) {
             Verdict = "Accepted";
@@ -142,14 +142,14 @@ public class ProcessExecutor extends Thread{
         } else {
             Verdict = "Wrong Answer";
         }
-        System.out.println("Exit execxute ones");
+        //System.out.println("Exit execxute ones");
         return Verdict;
     }
 
     @Override
     public void run() {
         try {
-            System.out.println("Exexuting ");
+            //System.out.println("Exexuting ");
 
             File SourceCode = null;
             if (submission.Language.equalsIgnoreCase("C++")) {
@@ -178,7 +178,7 @@ public class ProcessExecutor extends Thread{
                 }
             }
             submission.Verdict = Verdict;
-            System.out.println(submission);
+            //System.out.println(submission);
                 
             }
             else 
