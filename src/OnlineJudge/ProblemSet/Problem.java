@@ -61,11 +61,13 @@ public class Problem implements Serializable {
             int n = 1;
             for (File f : Inputs) {
                 CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Input" + n+".txt"), f);
+                n++;
             }
 
             n = 1;
             for (File f : Outputs) {
                 CopyFile(new File(Path.getAbsolutePath() + FileSeparator + "Output" + n+".txt"), f);
+                n++;
             }
 
             this.Name = Name;
