@@ -89,11 +89,12 @@ public class User implements Serializable{
     public void setMySubmissions(ArrayList<Integer> mySubmissions) {
         this.mySubmissions = mySubmissions;
     }
-    
-    
+
     @Override
     public String toString() {
-        return "User{" + "Name=" + Name + ", Handle=" + Handle + ", Email=" + Email + ", Country=" + Country + ", University=" + University + ", Password=" + Password + ", myThread=" + myThread + '}';
+        return "User{" + "Name=" + Name + ", Handle=" + Handle + ", Email=" + Email + ", Country=" + Country + ", University=" + University + ", Password=" + Password + ", myThread=" + myThread + ", mySubmissions=" + mySubmissions + '}';
     }
+    
+    
     
 }

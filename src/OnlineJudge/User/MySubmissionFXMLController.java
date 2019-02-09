@@ -63,7 +63,7 @@ public class MySubmissionFXMLController implements Initializable {
         
                 
         ObservableList<Submission > data = FXCollections.observableArrayList();
-        
+        //System.out.println("User "+LocalUser.getUser());
         for(Integer id : LocalUser.getUser().getMySubmissions())
             data.add(SubmissionSet.Submissions.get(id));
         
