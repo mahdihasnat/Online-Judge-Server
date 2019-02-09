@@ -1,1 +1,1 @@
-g++ SourceCode.cpp
+javac Solution.java

@@ -1,0 +1,4 @@
+Solution.java:5: error: reached end of file while parsing
+}asdfghj
+ ^
+1 error
