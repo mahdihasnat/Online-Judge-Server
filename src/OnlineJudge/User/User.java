@@ -31,10 +31,7 @@ public class User implements Serializable{
         this.Country = Country;
         this.University = University;
         this.Password = Password;
-    }
-    public User(String Name)
-    {
-        this.Name = Name;
+        mySubmissions= new ArrayList< Integer >();
     }
     
     public String getName() {

@@ -11,6 +11,7 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import OnlineJudge.ProblemSet.*;
+import OnlineJudge.User.LocalUser;
 import OnlineJudge.User.User;
 import OnlineJudge.User.UserSet;
 import static java.lang.Long.max;
@@ -31,6 +32,7 @@ public class ProcessExecutor extends Thread {
     public ProcessExecutor(Submission submission) {
         this.submission = submission;
         problem = ProblemSet.Problems.get(submission.getProbmemId());
+        
         user= UserSet.Users.get(submission.getHandle());
         user.getMySubmissions().add(submission.getId());
         start();

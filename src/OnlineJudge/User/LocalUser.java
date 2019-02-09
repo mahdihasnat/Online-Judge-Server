@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @author MAHDI
  */
 public class LocalUser {
-    public static User user;
+    private static User user;
     public static void setAdmin()
     {
         try {
@@ -23,6 +23,8 @@ public class LocalUser {
             String address= InetAddress.getLocalHost().getHostAddress();
             
             user = new User(address,"admin","Admin@admin.com","BD","BUET","admin");
+            if(!UserSet.Users.containsKey("admin"))
+                UserSet.Users.put("admin", user);
         } catch (UnknownHostException ex) {
             Logger.getLogger(LocalUser.class.getName()).log(Level.SEVERE, null, ex);
         }
