@@ -32,7 +32,6 @@ public class ProcessExecutor extends Thread {
     public ProcessExecutor(Submission submission) {
         this.submission = submission;
         problem = ProblemSet.Problems.get(submission.getProbmemId());
-        
         user= UserSet.Users.get(submission.getHandle());
         user.getMySubmissions().add(submission.getId());
         start();

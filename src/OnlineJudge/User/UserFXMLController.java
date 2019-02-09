@@ -34,8 +34,9 @@ public class UserFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        OnlineJudge.Nodes=Node;
-        UserName.setText(LocalUser.getUser().getName());
+        System.out.println("User fxml controller ini");
+        //OnlineJudge.Nodes=Node;
+        //UserName.setText(LocalUser.getUser().getName());
         // TODO
     }    
 
