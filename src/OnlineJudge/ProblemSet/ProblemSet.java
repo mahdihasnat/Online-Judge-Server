@@ -5,7 +5,6 @@
  */
 package OnlineJudge.ProblemSet;
 
-import static OnlineJudge.ProblemSet.Problem.path;
 import static OnlineJudge.ProblemSet.ProblemSet.Problems;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,13 +14,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**

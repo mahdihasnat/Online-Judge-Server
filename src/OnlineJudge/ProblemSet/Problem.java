@@ -191,21 +191,15 @@ public class Problem implements Serializable {
     public void setTotalInputs(Integer TotalInputs) {
         this.TotalInputs = TotalInputs;
     }
-
-    public int getTotalAccepted() {
-        return TotalAccepted;
+    
+    public  void IncreamentTotalAttempted()
+    {
+        TotalAttempted++;
     }
-
-    public void setTotalAccepted(int TotalAccepted) {
-        this.TotalAccepted = TotalAccepted;
-    }
-
-    public int getTotalAttempted() {
-        return TotalAttempted;
-    }
-
-    public void setTotalAttempted(int TotalAttempted) {
-        this.TotalAttempted = TotalAttempted;
+    
+    public  void IncreamentTotalAccepted()
+    {
+        TotalAccepted++;
     }
 
     public Integer getTimeLimit() {

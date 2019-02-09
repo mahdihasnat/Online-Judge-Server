@@ -29,6 +29,7 @@ public class LocalUser {
     }
     
     public static User getUser() {
+        if(user==null) setAdmin();
         return user;
     }
 

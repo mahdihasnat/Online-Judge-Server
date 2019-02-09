@@ -11,6 +11,8 @@ import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import OnlineJudge.ProblemSet.*;
+import OnlineJudge.User.User;
+import OnlineJudge.User.UserSet;
 import static java.lang.Long.max;
 import java.util.concurrent.TimeUnit;
 
@@ -21,11 +23,16 @@ import java.util.concurrent.TimeUnit;
 public class ProcessExecutor extends Thread {
 
     Submission submission;
+    Problem problem;
+    User user;
     int ExitValue;
     static final String FileSeparator = System.getProperty("file.separator");
 
     public ProcessExecutor(Submission submission) {
         this.submission = submission;
+        problem = ProblemSet.Problems.get(submission.getProbmemId());
+        user= UserSet.Users.get(submission.getHandle());
+        user.getMySubmissions().add(submission.getId());
         start();
     }
 
@@ -70,7 +77,9 @@ public class ProcessExecutor extends Thread {
     public void run() {
         try {
             //System.out.println("Exexuting ");
-
+            
+            problem.IncreamentTotalAttempted();
+            
             File SourceCode = null;
             if (submission.Language.equalsIgnoreCase("C++")) {
                 SourceCode = new File("SourceCode.cpp");
@@ -87,7 +96,6 @@ public class ProcessExecutor extends Thread {
                 }
                 Output.createNewFile();
 
-                Problem problem = ProblemSet.Problems.get(submission.ProbmemId);
                 submission.Verdict = "Judging ... ... ...";
                 String Verdict = "";
                 
@@ -118,7 +126,6 @@ public class ProcessExecutor extends Thread {
                 }
                 Output.createNewFile();
 
-                Problem problem = ProblemSet.Problems.get(submission.ProbmemId);
                 submission.Verdict = "Judging ... ... ...";
                 String Verdict = "";
                 
@@ -133,6 +140,8 @@ public class ProcessExecutor extends Thread {
                 submission.Verdict = Verdict;
                 System.out.println(submission);
             }
+            
+            if(submission.Verdict.equalsIgnoreCase("Accepted")) problem.IncreamentTotalAccepted();
 
         } catch (Exception ex) {
             System.out.println(ex.getCause());

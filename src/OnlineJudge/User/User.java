@@ -5,20 +5,23 @@
  */
 package OnlineJudge.User;
 
+import OnlineJudge.Submission.Submission;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
  * @author MAHDI
  */
 public class User implements Serializable{
-    String Name;
-    String Handle;
-    String Email;
-    String Country;
-    String University;
-    String Password;
+    private String Name;
+    private String Handle;
+    private String Email;
+    private String Country;
+    private String University;
+    private String Password;
     transient Thread myThread;
+    private ArrayList< Integer > mySubmissions; 
     public User(String Name, String Handle, String Email, String Country, String University, String Password) {
         if(Country.equals("")) Country="Bangladesh";
         if(University.equals("")) University="BUET";
@@ -34,9 +37,6 @@ public class User implements Serializable{
         this.Name = Name;
     }
     
-    // solaimon 123
-    // mahdi 
-
     public String getName() {
         return Name;
     }
@@ -85,6 +85,15 @@ public class User implements Serializable{
         this.Password = Password;
     }
 
+    public ArrayList<Integer> getMySubmissions() {
+        return mySubmissions;
+    }
+
+    public void setMySubmissions(ArrayList<Integer> mySubmissions) {
+        this.mySubmissions = mySubmissions;
+    }
+    
+    
     @Override
     public String toString() {
         return "User{" + "Name=" + Name + ", Handle=" + Handle + ", Email=" + Email + ", Country=" + Country + ", University=" + University + ", Password=" + Password + ", myThread=" + myThread + '}';

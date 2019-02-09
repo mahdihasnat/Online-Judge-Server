@@ -5,6 +5,7 @@
  */
 package OnlineJudge.ProblemSet;
 
+import static OnlineJudge.OnlineJudge.Nodes;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -64,6 +67,18 @@ public class ProblemSetFXMLController implements Initializable {
         System.out.println("Selected problm "+SelectedProblem);
         ProblemShowFXMLController.problem= SelectedProblem;
         
+        try
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/ProblemSet/ProblemShowFXML.fxml"));
+            Nodes.getChildren().removeAll(Nodes.getChildren());
+            Nodes.getChildren().add(root);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            
+        }
     
     }
     

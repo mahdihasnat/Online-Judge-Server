@@ -7,11 +7,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="680.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OnlineJudge.User.StatusFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="680.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OnlineJudge.User.MySubmissionFXMLController">
     <stylesheets>
-        <URL value="@statusfxml.css" />
+        <URL value="@mysubmissionfxml.css" />
     </stylesheets>
-   <children>
+    <children>
       <TableView fx:id="StatusTable" prefHeight="501.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
           <TableColumn fx:id="SubmissionId" prefWidth="62.0" sortType="DESCENDING" text="#" />

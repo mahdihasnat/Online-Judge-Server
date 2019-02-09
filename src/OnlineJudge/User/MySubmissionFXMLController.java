@@ -16,14 +16,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 
 /**
  * FXML Controller class
  *
- * @author WNL
+ * @author MAHDI
  */
-public class StatusFXMLController implements Initializable {
+public class MySubmissionFXMLController implements Initializable {
 
     @FXML
     private TableColumn<Submission, Integer > SubmissionId;
@@ -47,8 +46,6 @@ public class StatusFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // System.out.println("Table View ini");
-        
         
         SubmissionId.setCellValueFactory(new PropertyValueFactory<Submission,Integer>("Id"));
         
@@ -64,11 +61,11 @@ public class StatusFXMLController implements Initializable {
         
         TimeTaken.setCellValueFactory(new PropertyValueFactory<Submission,String>("TimeTaken"));
         
-        
-        
+                
         ObservableList<Submission > data = FXCollections.observableArrayList();
         
-        data.addAll(SubmissionSet.Submissions.values());
+        for(Integer id : LocalUser.getUser().getMySubmissions())
+            data.add(SubmissionSet.Submissions.get(id));
         
         StatusTable.setItems(data);
         StatusTable.getSortOrder().add(SubmissionId);

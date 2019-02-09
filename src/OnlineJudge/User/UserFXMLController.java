@@ -6,20 +6,14 @@
 package OnlineJudge.User;
 
 import OnlineJudge.OnlineJudge;
-import OnlineJudge.ProblemSet.ProblemSet;
-import OnlineJudge.User.LocalUser;
-import OnlineJudge.User.User;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -48,17 +42,12 @@ public class UserFXMLController implements Initializable {
     @FXML
     private void HomeButtonClicked(ActionEvent event) throws IOException {
         System.out.println("Home buton clicked");
-        
-            
-        
-        
-        
     }
 
 
     @FXML
     private void ProblemsetButtonClicked(ActionEvent event) {
-        System.out.println("Problemset button clicked");
+        //System.out.println("Problemset button clicked");
         try
         {
             Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/ProblemSet/ProblemSetFXML.fxml"));
@@ -75,7 +64,7 @@ public class UserFXMLController implements Initializable {
 
     @FXML
     private void SubmitSolutionButtonClicked(ActionEvent event) {
-        System.out.println("Submit button clicked");
+        //System.out.println("Submit button clicked");
         try
         {
             Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/SubmitFXML.fxml"));
@@ -92,7 +81,7 @@ public class UserFXMLController implements Initializable {
 
     @FXML
     private void StatusButtonClicked(ActionEvent event) {
-        System.out.println("Status button clicked");
+        //System.out.println("Status button clicked");
         try
         {
             Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/StatusFXML.fxml"));
@@ -109,14 +98,27 @@ public class UserFXMLController implements Initializable {
 
     @FXML
     private void MySubmissionButtonClicked(ActionEvent event) {
+        
+        try
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/StatusFXML.fxml"));
+            Node.getChildren().removeAll(Node.getChildren());
+            Node.getChildren().add(root);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            
+        }
     }
 
     @FXML
     private void MyProfileButtonClicked(ActionEvent event) {
-        System.out.println("MyProfile button clicked");
+        //System.out.println("MyProfile button clicked");
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/MyProfileFXML.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/MySubmissionFXML.fxml"));
             Node.getChildren().removeAll(Node.getChildren());
             Node.getChildren().add(root);
         }
@@ -131,7 +133,7 @@ public class UserFXMLController implements Initializable {
     @FXML
     private void LogOutButtonClicked(ActionEvent event) {
         
-        System.out.println("LogOut button clicked");
+        //System.out.println("LogOut button clicked");
         try
         {
             System.exit(0);
@@ -152,7 +154,7 @@ public class UserFXMLController implements Initializable {
 
     @FXML
     private void EditProblemButtonClicked(ActionEvent event) {
-        System.out.println("Edit button clicked");
+        //System.out.println("Edit button clicked");
         try
         {
             Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/ProblemSet/EditProblemFXML.fxml"));
