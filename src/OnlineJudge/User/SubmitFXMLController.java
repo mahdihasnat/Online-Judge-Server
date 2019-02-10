@@ -107,11 +107,12 @@ public class SubmitFXMLController implements Initializable {
         System.out.println("Submit success");
         ErrorMessage.setText("Submission successful");
         if (!ProblemIdMessage.isVisible() || ProblemSet.Problems.containsKey(ProblemName.getText())) {
-            Submission ns =  new Submission(ProblemIdMessage.isVisible() ? ProblemName.getText() : ProblemShowFXMLController.problem.getId(), LocalUser.getUser().getHandle(), SelectLanguageButton.getText(), SourceCode.getText(), SubmissionSet.TotalSubmissions);
-            SubmissionSet.Submissions.put(SubmissionSet.TotalSubmissions, ns);
+            Submission ns =  new Submission(ProblemIdMessage.isVisible() ? ProblemName.getText() : ProblemShowFXMLController.problem.getId(), LocalUser.getUser().getHandle(), SelectLanguageButton.getText(), SourceCode.getText(), SubmissionSet.TotalSubmissions++);
+            SubmissionSet.Submissions.put(ns.getId(), ns);
             new ProcessExecutor(ns);
         } else {
             System.out.println("no problem found");
+            ErrorMessage.setText("No Problem Found!");
         }
 
     }

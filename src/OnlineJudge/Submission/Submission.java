@@ -29,7 +29,6 @@ public class Submission implements Serializable {
     transient Thread myThread;
     public Submission(String ProbmemId, String Handle, String Lang, String Code,Integer Id) {
         this.ProbmemId = ProbmemId;
-        
         this.ProblemName=ProblemSet.Problems.get(ProbmemId).getName();
         this.Handle = Handle;
         this.Language = Lang;
@@ -39,8 +38,8 @@ public class Submission implements Serializable {
         TimeTaken="";
         MemoryTaken="";
         this.Id=Id;
-        SubmissionSet.TotalSubmissions++;
     }
+    
 
     public void setProbmemId(String ProbmemId) {
         this.ProbmemId = ProbmemId;

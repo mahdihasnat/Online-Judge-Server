@@ -15,7 +15,7 @@ import javafx.fxml.Initializable;
  * @author MAHDI
  */
 public class SubmissionShowFXMLController implements Initializable {
-
+    private static Submission submission;
     /**
      * Initializes the controller class.
      */
