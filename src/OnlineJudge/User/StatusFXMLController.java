@@ -5,17 +5,24 @@
  */
 package OnlineJudge.User;
 
+import OnlineJudge.OnlineJudge;
 import OnlineJudge.Submission.Submission;
 import OnlineJudge.Submission.SubmissionSet;
+import OnlineJudge.Submission.SubmissionShowFXMLController;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
 /**
@@ -73,5 +80,21 @@ public class StatusFXMLController implements Initializable {
         StatusTable.setItems(data);
         StatusTable.getSortOrder().add(SubmissionId);
     }    
+
+    @FXML
+    private void ShowSubmissionClicked(MouseEvent event) throws IOException {
+        
+        
+        
+        Submission SelectedSubmission= StatusTable.getSelectionModel().getSelectedItem();
+        if(SelectedSubmission==null ) return ;
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/OnlineJudge/Submission/SubmissionShowFXML.fxml"));
+        Parent root = loader.load();
+        SubmissionShowFXMLController controller = loader.getController();
+        controller.setSubmission(SelectedSubmission);
+        OnlineJudge.Nodes.getChildren().removeAll(OnlineJudge.Nodes.getChildren());
+        OnlineJudge.Nodes.getChildren().add(root);
+        
+    }
     
 }
