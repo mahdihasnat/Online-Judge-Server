@@ -8,16 +8,19 @@
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/ProblemSet.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/StatusFXML.fxml</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/Problem.java</file>
-            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Admin/AdminFXML.fxml</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/UserFXMLController.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/AddProblemFXMLController.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/editproblemfxml.css</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/Server/ProcessExecutor.java</file>
+            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Submission/SubmissionShowFXMLController.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/Server/LoginRequest.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/Server/Server.java</file>
+            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/SubmitFXML.fxml</file>
+            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Submission/submissionshowfxml.css</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/EditProblemFXML.fxml</file>
+            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/MySubmissionFXML.fxml</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/UserSet.java</file>
-            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Admin/AdminFXMLController.java</file>
+            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/MySubmissionFXMLController.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Submission/SubmissionSet.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/FileUtil/Folder.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/ProblemSetFXMLController.java</file>
@@ -26,11 +29,11 @@
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/ProblemShowFXMLController.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/ProblemSet/EditProblemFXMLController.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Submission/Submission.java</file>
-            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/OnlineJudgeFXMLController.java</file>
+            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Submission/SubmissionShowFXML.fxml</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/StatusFXMLController.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/OnlineJudge.java</file>
             <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/UserFXML.fxml</file>
-            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/Admin/Admin.java</file>
+            <file>file:/C:/Users/MAHDI/Documents/GitHub/Online-Judge-Server/src/OnlineJudge/User/mysubmissionfxml.css</file>
         </group>
     </open-files>
 </project-private>

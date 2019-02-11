@@ -61,11 +61,14 @@ public class MySubmissionFXMLController implements Initializable {
         
         TimeTaken.setCellValueFactory(new PropertyValueFactory<Submission,String>("TimeTaken"));
         
-                
+        System.out.println("LocalUser = "+LocalUser.getUser());
         ObservableList<Submission > data = FXCollections.observableArrayList();
         
-        for(Integer id : LocalUser.getUser().getMySubmissions())
-            data.add(SubmissionSet.Submissions.get(id));
+        for(Submission s : SubmissionSet.Submissions.values())
+        {
+            if(s.getHandle().equals(LocalUser.getUser().getHandle()))
+                data.add(s);
+        }
         
         StatusTable.setItems(data);
         StatusTable.getSortOrder().add(SubmissionId);

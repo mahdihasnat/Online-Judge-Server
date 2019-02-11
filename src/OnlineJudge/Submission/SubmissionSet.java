@@ -65,5 +65,21 @@ public class SubmissionSet {
         }
     }
 
+    public static HashMap<Integer, Submission> getSubmissions() {
+        return Submissions;
+    }
+
+    public static void setSubmissions(HashMap<Integer, Submission> Submissions) {
+        SubmissionSet.Submissions = Submissions;
+    }
+
+    public static Integer getTotalSubmissions() {
+        return TotalSubmissions;
+    }
+
+    public static void setTotalSubmissions(Integer TotalSubmissions) {
+        SubmissionSet.TotalSubmissions = TotalSubmissions;
+    }
+
     
 }

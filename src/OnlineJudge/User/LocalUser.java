@@ -15,14 +15,21 @@ import java.util.logging.Logger;
  * @author MAHDI
  */
 public class LocalUser {
-    public static User user;
+    private static User user;
     public static void setAdmin()
     {
+        if(UserSet.Users.containsKey("admin"))
+        {
+            user = UserSet.Users.get("admin");
+            return ;
+        }
         try {
             System.out.println("Admin set");
             String address= InetAddress.getLocalHost().getHostAddress();
             
             user = new User(address,"admin","Admin@admin.com","BD","BUET","admin");
+            if(!UserSet.Users.containsKey("admin"))
+                UserSet.Users.put("admin", user);
         } catch (UnknownHostException ex) {
             Logger.getLogger(LocalUser.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -30,12 +37,10 @@ public class LocalUser {
     
     public static User getUser() {
         if(user==null) setAdmin();
-        return user;
+        return UserSet.Users.get("admin");
     }
 
-    public static void setUser(User user) {
-        LocalUser.user = user;
-    }
+    
     
     
 }

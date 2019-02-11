@@ -42,7 +42,7 @@ public class ProblemSetFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Table View ini");
+        //System.out.println("Table View ini");
         //ProblemsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         ObservableList<Problem> data = FXCollections.observableArrayList();
         //ProblemSet.LoadProblemSet();
