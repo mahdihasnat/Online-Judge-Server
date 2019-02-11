@@ -141,9 +141,11 @@ public class ProcessExecutor extends Thread {
                         }
                     }
                     submission.Verdict = Verdict;
-                    //System.out.println(submission);
+                    
                 }
-
+                
+                System.out.println(submission);
+                
                 if (submission.Verdict.equalsIgnoreCase("Accepted")) {
                     problem.IncreamentTotalAccepted();
                 }
