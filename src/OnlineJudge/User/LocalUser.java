@@ -27,7 +27,7 @@ public class LocalUser {
             System.out.println("Admin set");
             String address= InetAddress.getLocalHost().getHostAddress();
             
-            user = new User(address,"admin","Admin@admin.com","BD","BUET","admin");
+            user = new User(address,"admin","buetoj17@gmail.com","BD","BUET","passwordnai");
             if(!UserSet.Users.containsKey("admin"))
                 UserSet.Users.put("admin", user);
         } catch (UnknownHostException ex) {

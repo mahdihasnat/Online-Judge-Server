@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.geometry.*?>
 <?import java.lang.*?>
@@ -11,7 +12,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OnlineJudge.Submission.SubmissionShowFXMLController">
    <top>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane prefWidth="31.0" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -27,14 +28,6 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="#" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Author" GridPane.columnIndex="1" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Problem" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Lang" GridPane.columnIndex="3" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Verdict" GridPane.columnIndex="4" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Time" GridPane.columnIndex="5" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Memory" GridPane.columnIndex="6" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="87.0" text="Sent" GridPane.columnIndex="7" />
             <Label fx:id="SubmisionId" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="SubmisionId" GridPane.rowIndex="1" />
             <Label fx:id="Handle" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Handle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label fx:id="ProblemId" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="ProblemId" GridPane.columnIndex="2" GridPane.rowIndex="1" />
@@ -43,6 +36,14 @@
             <Label fx:id="TimeTaken" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="TimeTaken" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             <Label fx:id="MemoryTaken" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="MemoryTaken" GridPane.columnIndex="6" GridPane.rowIndex="1" />
             <Label fx:id="Time" alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Time" GridPane.columnIndex="7" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="85.0" text="#" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Author" GridPane.columnIndex="1" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Problem" GridPane.columnIndex="2" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Lang" GridPane.columnIndex="3" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Verdict" GridPane.columnIndex="4" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Time" GridPane.columnIndex="5" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Memory" GridPane.columnIndex="6" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="31.0" prefWidth="87.0" text="Submitted" GridPane.columnIndex="7" />
             
             
          </children>
@@ -56,29 +57,27 @@
         <content>
           <VBox prefWidth="680.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="450.0" text="Code">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Button>
-            <TextArea fx:id="Code" VBox.vgrow="ALWAYS">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </TextArea>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="31.0" prefWidth="450.0" text="Comment">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </Button>
-            <TextArea fx:id="Comment">
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </TextArea>
+                  <HBox prefHeight="0.0" prefWidth="680.0">
+                     <children>
+                        <Label prefHeight="31.0" prefWidth="80.0" text="Code:">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Label>
+                        <Button mnemonicParsing="false" onAction="#CopyCode" text="Copy">
+                           <HBox.margin>
+                              <Insets left="400.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <TextFlow fx:id="Code" prefHeight="200.0" prefWidth="200.0" />
+                  <Label prefHeight="31.0" prefWidth="80.0" text="Comment:">
+                     <VBox.margin>
+                        <Insets left="50.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextFlow fx:id="Comment" prefHeight="200.0" prefWidth="200.0" />
          </children>
       </VBox>
             

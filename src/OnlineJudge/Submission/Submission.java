@@ -7,39 +7,44 @@ package OnlineJudge.Submission;
 
 import OnlineJudge.ProblemSet.ProblemSet;
 import Server.ProcessExecutor;
+import java.awt.Color;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 
 /**
  *
  * @author MAHDI
  */
 public class Submission implements Serializable {
-    public String ProbmemId;
-    public String Handle;
-    public String Language;
-    public String Code;
-    public String Verdict;
-    public String Time;
-    public String TimeTaken;
-    public String MemoryTaken;
-    public Integer Id;
-    public String ProblemName;
-    public String Comment;
+
+    private String ProbmemId;
+    private String Handle;
+    private String Language;
+    private String Code;
+    private String Verdict;
+    private String Time;
+    private String TimeTaken;
+    private String MemoryTaken;
+    private Integer Id;
+    private String ProblemName;
+    private String Comment;
     transient Thread myThread;
-    public Submission(String ProbmemId, String Handle, String Lang, String Code,Integer Id) {
+
+    public Submission(String ProbmemId, String Handle, String Lang, String Code, Integer Id) {
         this.ProbmemId = ProbmemId;
-        this.ProblemName=ProblemSet.Problems.get(ProbmemId).getName();
+        this.ProblemName = ProblemSet.Problems.get(ProbmemId).getName();
         this.Handle = Handle;
         this.Language = Lang;
         this.Code = Code;
-        Time=LocalDateTime.now().toString();
-        Verdict= "Not Judged Yet";
-        TimeTaken="";
-        MemoryTaken="";
-        this.Id=Id;
+        Time = LocalDateTime.now().toString();
+        Verdict = "Not Judged Yet";
+        TimeTaken = "";
+        MemoryTaken = "";
+        this.Id = Id;
     }
-    
 
     public void setProbmemId(String ProbmemId) {
         this.ProbmemId = ProbmemId;
@@ -78,6 +83,7 @@ public class Submission implements Serializable {
     }
 
     public void setProblemName(String ProblemName) {
+        
         this.ProblemName = ProblemName;
     }
 
@@ -134,5 +140,5 @@ public class Submission implements Serializable {
         return "Submission{" + "ProbmemId=" + ProbmemId + ", Handle=" + Handle + ", Language=" + Language + ", Code=" + Code + ", Verdict=" + Verdict + ", Time=" + Time + ", TimeTaken=" + TimeTaken + ", MemoryTaken=" + MemoryTaken + ", Id=" + Id + ", ProblemName=" + ProblemName + ", Comment=" + Comment + '}';
     }
 
-    
+
 }

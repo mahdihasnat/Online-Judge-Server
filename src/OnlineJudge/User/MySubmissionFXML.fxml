@@ -12,10 +12,10 @@
         <URL value="@mysubmissionfxml.css" />
     </stylesheets>
     <children>
-      <TableView fx:id="StatusTable" prefHeight="501.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="StatusTable" onMouseClicked="#ShowSubmissionClicked" prefHeight="501.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
-          <TableColumn fx:id="SubmissionId" prefWidth="62.0" sortType="DESCENDING" text="#" />
-            <TableColumn fx:id="SubmissionTime" prefWidth="70.0" text="When" />
+          <TableColumn fx:id="SubmissionId" prefWidth="42.0" sortType="DESCENDING" text="#" />
+            <TableColumn fx:id="SubmissionTime" prefWidth="90.0" text="When" />
             <TableColumn fx:id="UserHandle" minWidth="0.0" prefWidth="86.0" text="Who" />
           <TableColumn fx:id="ProblemName" minWidth="0.0" prefWidth="136.0" text="Problem" />
             <TableColumn fx:id="Language" minWidth="0.0" prefWidth="106.0" text="Lang" />

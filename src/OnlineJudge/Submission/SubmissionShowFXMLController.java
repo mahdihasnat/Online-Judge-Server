@@ -5,18 +5,22 @@
  */
 package OnlineJudge.Submission;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**
  * FXML Controller class
@@ -43,9 +47,9 @@ public class SubmissionShowFXMLController implements Initializable {
     @FXML
     private Label Time;
     @FXML
-    private TextArea Code;
+    private TextFlow Code;
     @FXML
-    private TextArea Comment;
+    private TextFlow Comment;
 
     /**
      * Initializes the controller class.
@@ -64,8 +68,7 @@ public class SubmissionShowFXMLController implements Initializable {
         TimeTaken.setText(submission.getTimeTaken());
         MemoryTaken.setText(submission.getMemoryTaken());
         Time.setText(submission.getTime());
-        Code.setText(submission.getCode());
-        Comment.setText(submission.getComment());
+        Comment.getChildren().add(new Text(submission.getComment()));
         // TODO
     }
 
@@ -90,9 +93,17 @@ public class SubmissionShowFXMLController implements Initializable {
         TimeTaken.setText(submission.getTimeTaken());
         MemoryTaken.setText(submission.getMemoryTaken());
         Time.setText(submission.getTime());
-        Code.setText(submission.getCode());
-        Comment.setText(submission.getComment());
+        Code.getChildren().add(new Text(submission.getCode()));
+        Comment.getChildren().add(new Text(submission.getComment()));
 
+    }
+
+    @FXML
+    private void CopyCode(ActionEvent event) {
+        Toolkit.getDefaultToolkit()
+        .getSystemClipboard()
+        .setContents(new StringSelection(submission.getCode()),
+                null);
     }
 
 }

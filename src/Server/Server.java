@@ -250,7 +250,6 @@ class InputFromClient extends Thread {
             System.out.println(e.getCause());
             e.printStackTrace();
             return false;
-
         } 
     }
 

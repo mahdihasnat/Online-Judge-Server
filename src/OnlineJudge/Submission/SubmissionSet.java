@@ -12,6 +12,9 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.ObservableMap;
 
 /**
  *
@@ -40,6 +43,7 @@ public class SubmissionSet {
             fos.close();
         } catch (Exception e) {
             System.out.println(e.getCause());
+            e.printStackTrace();
         }
         
     }

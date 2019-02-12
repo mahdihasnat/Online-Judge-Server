@@ -9,6 +9,7 @@ import OnlineJudge.OnlineJudge;
 import OnlineJudge.Submission.Submission;
 import OnlineJudge.Submission.SubmissionSet;
 import OnlineJudge.Submission.SubmissionShowFXMLController;
+import com.sun.prism.paint.Color;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,13 +20,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Paint;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.concurrent.Task;
 
 /**
  * FXML Controller class
@@ -35,19 +40,19 @@ import javafx.util.Callback;
 public class StatusFXMLController implements Initializable {
 
     @FXML
-    private TableColumn<Submission, Integer > SubmissionId;
+    private TableColumn<Submission, Integer> SubmissionId;
     @FXML
-    private TableColumn<Submission, String > SubmissionTime;
+    private TableColumn<Submission, String> SubmissionTime;
     @FXML
-    private TableColumn<Submission, String > UserHandle;
+    private TableColumn<Submission, String> UserHandle;
     @FXML
-    private TableColumn<Submission, String > ProblemName;
+    private TableColumn<Submission, String> ProblemName;
     @FXML
-    private TableColumn<Submission, String > Language;
+    private TableColumn<Submission, String> Language;
     @FXML
-    private TableColumn<Submission, String > Verdict;
+    private TableColumn<Submission, String> Verdict;
     @FXML
-    private TableColumn<Submission, String > TimeTaken;
+    private TableColumn<Submission, String> TimeTaken;
     @FXML
     private TableView<Submission> StatusTable;
 
@@ -56,53 +61,93 @@ public class StatusFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // System.out.println("Table View ini");
-        
-        
-        SubmissionId.setCellValueFactory(new PropertyValueFactory<Submission,Integer>("Id"));
-        
-        SubmissionTime.setCellValueFactory(new PropertyValueFactory<Submission,String>("Time"));
-        
-        UserHandle.setCellValueFactory(new PropertyValueFactory<Submission,String>("Handle"));
-        
-        ProblemName.setCellValueFactory(new PropertyValueFactory<Submission,String>("ProblemName"));
-        
-        Language.setCellValueFactory(new PropertyValueFactory<Submission,String>("Language"));
-        
-        Verdict.setCellValueFactory(new PropertyValueFactory<Submission,String>("Verdict"));
-        
-        TimeTaken.setCellValueFactory(new PropertyValueFactory<Submission,String>("TimeTaken"));
-        
-        
-        
-        ObservableList<Submission > data = FXCollections.observableArrayList();
-        
+        // System.out.println("Table View ini");
+
+        SubmissionId.setCellValueFactory(new PropertyValueFactory<Submission, Integer>("Id"));
+
+        SubmissionTime.setCellValueFactory(new PropertyValueFactory<Submission, String>("Time"));
+
+        UserHandle.setCellValueFactory(new PropertyValueFactory<Submission, String>("Handle"));
+
+        ProblemName.setCellValueFactory(new PropertyValueFactory<Submission, String>("ProblemName"));
+
+        Language.setCellValueFactory(new PropertyValueFactory<Submission, String>("Language"));
+
+        Verdict.setCellValueFactory(new PropertyValueFactory<Submission, String>("Verdict"));
+
+        TimeTaken.setCellValueFactory(new PropertyValueFactory<Submission, String>("TimeTaken"));
+
+        Verdict.setCellFactory(new Callback<TableColumn<Submission, String>, TableCell<Submission, String>>() {
+            @Override
+            public TableCell<Submission, String> call(TableColumn<Submission, String> param) {
+                return new TableCell<Submission, String>() {
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!isEmpty()) {
+                            if (item.equalsIgnoreCase("accepted")) {
+                                this.setTextFill(Paint.valueOf("green"));
+                            } else if (item.equalsIgnoreCase("wrong answer")) {
+                                this.setTextFill(Paint.valueOf("red"));
+                            }
+
+                            setText(item);
+
+                        }
+                    }
+                };
+            }
+        });
+
+        ObservableList<Submission> data = FXCollections.observableArrayList();
+
         data.addAll(SubmissionSet.Submissions.values());
-        
+
         StatusTable.setItems(data);
         StatusTable.getSortOrder().add(SubmissionId);
-    }    
+        task();
+    }
 
     @FXML
     private void ShowSubmissionClicked(MouseEvent event) throws IOException {
-        
-        
-        
-        Submission SelectedSubmission= StatusTable.getSelectionModel().getSelectedItem();
-        if(SelectedSubmission==null ) return ;
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("/OnlineJudge/Submission/SubmissionShowFXML.fxml"));
+
+        Submission SelectedSubmission = StatusTable.getSelectionModel().getSelectedItem();
+        if (SelectedSubmission == null) {
+            return;
+        }
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/OnlineJudge/Submission/SubmissionShowFXML.fxml"));
         Parent root = loader.load();
         SubmissionShowFXMLController controller = loader.getController();
         controller.setSubmission(SelectedSubmission);
         //OnlineJudge.Nodes.getChildren().removeAll(OnlineJudge.Nodes.getChildren());
         //OnlineJudge.Nodes.getChildren().add(root);
-        
+
         Scene scene = new Scene(root);
         Stage stage = new Stage();
         stage.initModality(Modality.WINDOW_MODAL);
         stage.setScene(scene);
         stage.show();
-        
+
     }
     
+
+    private void task() {
+
+        Task< Void> tsk = new Task< Void>() {
+            @Override
+            protected Void call() throws Exception {
+                //while (true) {
+                     StatusTable.refresh();
+                     Thread.sleep(1000);
+                    //System.out.println("updating ");
+                //}
+                return null;
+            }
+
+        };
+        Thread t = new Thread(tsk);
+        t.setDaemon(true);
+        t.start();
+    }
+
 }

@@ -43,6 +43,20 @@ public class UserFXMLController implements Initializable {
     @FXML
     private void HomeButtonClicked(ActionEvent event) throws IOException {
         System.out.println("Home buton clicked");
+        
+        try
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/HomeFXML.fxml"));
+            Node.getChildren().removeAll(Node.getChildren());
+            Node.getChildren().add(root);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            
+        }
+        
     }
 
 
@@ -119,9 +133,9 @@ public class UserFXMLController implements Initializable {
         //System.out.println("MyProfile button clicked");
         try
         {
-            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/MySubmissionFXML.fxml"));
-            Node.getChildren().removeAll(Node.getChildren());
-            Node.getChildren().add(root);
+            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/User/MyProfileFXML.fxml"));
+            OnlineJudge.Nodes.getChildren().removeAll(OnlineJudge.Nodes.getChildren());
+            OnlineJudge.Nodes.getChildren().add(root);
         }
         catch(Exception e)
         {

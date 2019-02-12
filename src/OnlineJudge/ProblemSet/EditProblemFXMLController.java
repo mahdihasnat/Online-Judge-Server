@@ -53,6 +53,19 @@ public class EditProblemFXMLController implements Initializable {
 
     @FXML
     private void DeleteProblemButtonClicked(ActionEvent event) {
+        System.out.println("DeleteProblemButtonClicked button clicked");
+        try
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/ProblemSet/DeleteProblemFXML.fxml"));
+            EditProblemNode.getChildren().removeAll(EditProblemNode.getChildren());
+            EditProblemNode.getChildren().add(root);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            
+        }
     }
     
 }
