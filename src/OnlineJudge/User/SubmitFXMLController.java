@@ -7,6 +7,7 @@ package OnlineJudge.User;
 
 import OnlineJudge.ProblemSet.ProblemShowFXMLController;
 import OnlineJudge.*;
+import OnlineJudge.ProblemSet.Problem;
 import OnlineJudge.ProblemSet.ProblemSet;
 import OnlineJudge.Submission.Submission;
 import OnlineJudge.Submission.SubmissionSet;
@@ -34,7 +35,7 @@ import org.omg.CORBA_2_3.portable.InputStream;
  * @author MAHDI
  */
 public class SubmitFXMLController implements Initializable {
-
+    private Problem problem;
     private final String CppCode = "#include <iostream>\n"
             + "\n"
             + "using namespace std;\n"
@@ -69,14 +70,8 @@ public class SubmitFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        if (ProblemShowFXMLController.problem == null) {
-            ProblemIdMessage.setVisible(true);
-            ProblemName.setEditable(true);
-        } else {
-            ProblemIdMessage.setVisible(false);
-            ProblemName.setEditable(false);
-            ProblemName.setText(ProblemShowFXMLController.problem.getId() + " - " + ProblemShowFXMLController.problem.getName());
-        }
+        ProblemIdMessage.setVisible(true);
+        ProblemName.setEditable(true);
         ErrorMessage.setText("");
     }
 
@@ -107,7 +102,7 @@ public class SubmitFXMLController implements Initializable {
         System.out.println("Submit success");
         ErrorMessage.setText("Submission successful");
         if (!ProblemIdMessage.isVisible() || ProblemSet.Problems.containsKey(ProblemName.getText())) {
-            Submission ns =  new Submission(ProblemIdMessage.isVisible() ? ProblemName.getText() : ProblemShowFXMLController.problem.getId(), LocalUser.getUser().getHandle(), SelectLanguageButton.getText(), SourceCode.getText(), SubmissionSet.TotalSubmissions++);
+            Submission ns =  new Submission(ProblemIdMessage.isVisible() ? ProblemName.getText() : problem.getId(), LocalUser.getUser().getHandle(), SelectLanguageButton.getText(), SourceCode.getText(), SubmissionSet.TotalSubmissions++);
             SubmissionSet.Submissions.put(ns.getId(), ns);
             new ProcessExecutor(ns);
         } else {
@@ -148,5 +143,14 @@ public class SubmitFXMLController implements Initializable {
         }
 
     }
+
+    public void setProblem(Problem problem) {
+        this.problem= problem;
+        ProblemIdMessage.setVisible(false);
+        ProblemName.setEditable(false);
+        ProblemName.setText(problem.getId() + " - " + problem.getName());
+        
+    }
+    
 
 }

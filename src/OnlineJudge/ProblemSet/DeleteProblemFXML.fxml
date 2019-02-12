@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="460.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="OnlineJudge.ProblemSet.ProblemSetFXMLController">
+   <children>
+      <TableView fx:id="ProblemsTable" layoutX="-2.0" layoutY="-3.0" onKeyPressed="#ShowProblem" onMousePressed="#ShowProblem" prefHeight="497.0" prefWidth="680.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columns>
+            <TableColumn fx:id="ProblemId" prefWidth="146.0" text="Problem Id" />
+            <TableColumn fx:id="ProblemName" prefWidth="539.0" text="Problem Name" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

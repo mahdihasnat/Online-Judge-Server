@@ -23,7 +23,7 @@ public class Problem implements Serializable {
 
     private String Id;
     private String Name;
-    private String Statement;// pdf type statement 
+    private String Statement;
     private String Type;// "static" ,"dynamic","interactive"
     private String VerifierCode;// if dynamic then verifier cpp 
     private Integer TotalInputs;
@@ -217,6 +217,9 @@ public class Problem implements Serializable {
     public void setMemoryLimit(Integer MemoryLimit) {
         this.MemoryLimit = MemoryLimit;
     }
-
+    public  File getStatementFile()
+    {
+        return new File(new File(path.getAbsolutePath() + FileSeparator + this.Id).getAbsolutePath() + FileSeparator + this.Statement);
+    }
 
 }

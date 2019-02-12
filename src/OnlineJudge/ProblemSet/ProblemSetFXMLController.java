@@ -16,12 +16,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -29,7 +32,7 @@ import javafx.scene.input.MouseEvent;
  * @author MAHDI
  */
 public class ProblemSetFXMLController implements Initializable {
-
+    
     @FXML
     private TableView<Problem> ProblemsTable;
     @FXML
@@ -48,38 +51,42 @@ public class ProblemSetFXMLController implements Initializable {
         //ProblemSet.LoadProblemSet();
         data.addAll(ProblemSet.Problems.values());
         
-        ProblemId.setCellValueFactory(new PropertyValueFactory<Problem,String>("Id"));
-        ProblemName.setCellValueFactory(new PropertyValueFactory<Problem,String>("Name"));
+        ProblemId.setCellValueFactory(new PropertyValueFactory<Problem, String>("Id"));
+        ProblemName.setCellValueFactory(new PropertyValueFactory<Problem, String>("Name"));
         ProblemsTable.setItems(data);
         
-    }    
-/*
+    }
+
+    /*
     @FXML
     private void ShowProblem(KeyEvent event) {
         System.out.println("ShowProblem in keyboard ");
         }
-*/
-
+     */
+    
     @FXML
     private void ShowProblem(MouseEvent event) {
-        System.out.println("ShowProblem in mouse ");
-        Problem SelectedProblem= ProblemsTable.getSelectionModel().getSelectedItem();
-        System.out.println("Selected problm "+SelectedProblem);
-        ProblemShowFXMLController.problem= SelectedProblem;
+        Problem SelectedProblem = ProblemsTable.getSelectionModel().getSelectedItem();
+        System.out.println("Selected problm " + SelectedProblem);
         
-        try
-        {
-            Parent root = FXMLLoader.load(getClass().getResource("/OnlineJudge/ProblemSet/ProblemShowFXML.fxml"));
-            Nodes.getChildren().removeAll(Nodes.getChildren());
-            Nodes.getChildren().add(root);
-        }
-        catch(Exception e)
-        {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/OnlineJudge/ProblemSet/ProblemShowFXML.fxml"));
+            Parent root = loader.load();
+            ProblemShowFXMLController controller = loader.getController();
+            controller.setProblem(SelectedProblem);
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.WINDOW_MODAL);
+            stage.setScene(scene);
+            stage.show();
+            
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
             
         }
-    
+        
     }
     
 }

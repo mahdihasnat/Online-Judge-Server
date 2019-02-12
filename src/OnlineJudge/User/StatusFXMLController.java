@@ -23,6 +23,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -92,8 +94,14 @@ public class StatusFXMLController implements Initializable {
         Parent root = loader.load();
         SubmissionShowFXMLController controller = loader.getController();
         controller.setSubmission(SelectedSubmission);
-        OnlineJudge.Nodes.getChildren().removeAll(OnlineJudge.Nodes.getChildren());
-        OnlineJudge.Nodes.getChildren().add(root);
+        //OnlineJudge.Nodes.getChildren().removeAll(OnlineJudge.Nodes.getChildren());
+        //OnlineJudge.Nodes.getChildren().add(root);
+        
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.setScene(scene);
+        stage.show();
         
     }
     

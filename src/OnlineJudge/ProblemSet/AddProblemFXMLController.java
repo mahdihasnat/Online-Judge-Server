@@ -57,7 +57,8 @@ public class AddProblemFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         pInputs = new ArrayList< File>();
         pOutputs = new ArrayList< File>();
-
+        Type.setText("Static");
+        pType = "Static";
         // TODO
     }
 
