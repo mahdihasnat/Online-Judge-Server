@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
@@ -49,6 +50,11 @@ public class AddProblemFXMLController implements Initializable {
     private Label ErrorMessege;
     @FXML
     private MenuButton Type;
+    @FXML
+    private TextField FolderPath;
+    @FXML
+    private TextField TotalInputFile;
+    
 
     /**
      * Initializes the controller class.
@@ -182,6 +188,34 @@ public class AddProblemFXMLController implements Initializable {
             }
         }
 
+    }
+
+    @FXML
+    private void AddMultipleInput(ActionEvent event) {
+        if(TotalInputFile.getText().equals("")) return ;
+        if(FolderPath.getText().equals("")) return ;
+        File folder = new File(FolderPath.getText());
+        if(!folder.isDirectory())
+        {
+            ErrorMessege.setText("dir is not folder");
+            return;
+        }
+        Integer n= Integer.parseInt( TotalInputFile.getText());
+        for(int i=0;i<=n;i++)
+        {
+            File inp= new File (folder.getAbsolutePath()+ProblemSet.FileSeparator+"input"+i+".txt");
+            if(inp.exists())
+            {
+                File out= new File (folder.getAbsolutePath()+ProblemSet.FileSeparator+"output"+i+".txt");
+                if(out.exists())
+                {
+                    System.out.println("inp added"+i);
+                    pInputs.add(inp);
+                    pOutputs.add(out);
+                }
+            }
+        }
+        
     }
 
 }

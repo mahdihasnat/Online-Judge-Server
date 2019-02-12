@@ -18,8 +18,8 @@
             <TableColumn fx:id="SubmissionTime" prefWidth="90.0" text="When" />
             <TableColumn fx:id="UserHandle" minWidth="0.0" prefWidth="86.0" text="Who" />
           <TableColumn fx:id="ProblemName" minWidth="0.0" prefWidth="136.0" text="Problem" />
-            <TableColumn fx:id="Language" minWidth="0.0" prefWidth="106.0" text="Lang" />
-            <TableColumn fx:id="Verdict" minWidth="0.0" prefWidth="133.0" text="Verdict" />
+            <TableColumn fx:id="Language" minWidth="0.0" prefWidth="69.0" text="Lang" />
+            <TableColumn fx:id="Verdict" minWidth="0.0" prefWidth="170.0" text="Verdict" />
             <TableColumn fx:id="TimeTaken" minWidth="0.0" prefWidth="86.0" text="Time" />
         </columns>
       </TableView>

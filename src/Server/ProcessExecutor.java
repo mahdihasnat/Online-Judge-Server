@@ -15,8 +15,9 @@ import OnlineJudge.User.LocalUser;
 import OnlineJudge.User.User;
 import OnlineJudge.User.UserSet;
 import static java.lang.Long.max;
+import java.nio.CharBuffer;
 import java.util.concurrent.TimeUnit;
-
+import java.nio.file.Files;
 /**
  *
  * @author Student06
@@ -36,7 +37,6 @@ public class ProcessExecutor extends Thread {
         user.getMySubmissions().add(submission.getId());
         submission.setVerdict("Waiting for judjing");
         start();
-
     }
 
     static void WriteFile(String Code, String FileName) throws FileNotFoundException {
@@ -60,19 +60,30 @@ public class ProcessExecutor extends Thread {
     static private String ReadFile(File f) {
         String src = "";
         try {
+            
+            
+            /*
+            try {
             FileInputStream fis = new FileInputStream(f);
             BufferedInputStream bir = new BufferedInputStream(fis);
             int c = 1;
             while ((c = bir.read()) != -1) {
-
-                //System.out.print((char) c);
-                src += Character.toString((char) c);
+            
+            //System.out.print((char) c);
+            src += Character.toString((char) c);
             }
-        } catch (Exception ex) {
+            } catch (Exception ex) {
             System.out.println(ex.getMessage());
             ex.printStackTrace();
+            }
+            */
+            byte [] fileBytes = Files.readAllBytes(f.toPath());
+            src = new String (fileBytes);
+            return src;
+        } catch (IOException ex) {
+            Logger.getLogger(ProcessExecutor.class.getName()).log(Level.SEVERE, null, ex);
+            return src;
         }
-        return src;
     }
     @Override
      public void run() {
@@ -99,7 +110,7 @@ public class ProcessExecutor extends Thread {
                     }
                     Output.createNewFile();
 
-                    submission.setVerdict ("Judging ... ... ...");
+                    submission.setVerdict("Judging ... ... ...");
                     String Verdict = "";
 
                     String Path_plus_separator = Problem.path.getAbsolutePath() + FileSeparator + problem.getId() + FileSeparator;
@@ -163,9 +174,7 @@ public class ProcessExecutor extends Thread {
 
         // take all commands as input in a text file 
         File CmdCpp = new File("Cmd.txt");
-        if (!CmdCpp.exists()) {
-            CmdCpp.createNewFile();
-        }
+        
         System.out.println("Compiling " + SourceCode.getName());
 
         WriteFile("g++ " + SourceCode.getName(), CmdCpp.getName());
@@ -184,10 +193,10 @@ public class ProcessExecutor extends Thread {
         }
 
         // start the process 
-        //System.out.println("Compiling ");
+        System.out.println("Compiling ");
         Process pc = cmd.start();
         int res = pc.waitFor();
-        //System.out.println("Compilation ok");
+        System.out.println("Compilation ok");
 
         if (!exe.exists()) {
             submission.setComment ( ReadFile(CmdError));
@@ -205,7 +214,7 @@ public class ProcessExecutor extends Thread {
         Process pce = pb.start();
 
         boolean finished = pce.waitFor(problem.getTimeLimit().longValue(), TimeUnit.MILLISECONDS);
-        //System.out.println("programme Finished : " + finished);
+        System.out.println("programme Finished : " + finished);
         int timelimite = 0;
         if (!finished) {
             timelimite = 1;
@@ -217,14 +226,16 @@ public class ProcessExecutor extends Thread {
 
         long StopTime = System.nanoTime();
         long TimeElapsed = StopTime - StartTime;
-        //System.out.println("Time taken " + TimeElapsed + " nano sec");
+        System.out.println("Time taken " + TimeElapsed + " nano sec");
         Long timeTaken = max(Long.parseLong(submission.getTimeTaken()) * 1000000, TimeElapsed);
         timeTaken = timeTaken / 1000000;
         submission.setTimeTaken ( String.valueOf(timeTaken) );
         int ExitValue = pce.exitValue();
-        //System.out.println("Exit value " + ExitValue);
+        System.out.println("Exit value " + ExitValue);
         String Verdict = "";
-        if (ReadFile(Output).equals(ReadFile(ReirectOutput))) {
+        String myout= ReadFile(ReirectOutput);
+        String out = ReadFile(Output);
+        if (out.equals(myout)) {
             Verdict = "Accepted";
         } else if (timelimite == 1) {
             Verdict = "Time Limit Exceeded";
