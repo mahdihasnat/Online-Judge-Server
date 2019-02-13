@@ -105,7 +105,7 @@ public class StatusFXMLController implements Initializable {
 
         StatusTable.setItems(data);
         StatusTable.getSortOrder().add(SubmissionId);
-        task();
+        //task();
     }
 
     @FXML

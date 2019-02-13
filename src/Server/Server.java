@@ -102,6 +102,8 @@ class UpdateClient extends Thread {
 
                 ois.readObject();
                 oos.reset();
+                Thread.sleep(2000);
+                
             }
         } catch (Exception e) {
             System.out.println(e.getCause());
@@ -1050,7 +1052,7 @@ class InputFromClient extends Thread {
 "<p class=MsoNormal><span style='font-size:14.0pt;line-height:106%'>Regards,<o:p></o:p></span></p>\n" +
 "\n" +
 "<p class=MsoNormal><span style='font-size:14.0pt;line-height:106%'>BuetOJ17\n" +
-"Team, Mahdi &amp; <span class=SpellE>Solaimon</span><o:p></o:p></span></p>\n" +
+"Team, Mahdi &amp; <span class=SpellE>Solaiman</span><o:p></o:p></span></p>\n" +
 "\n" +
 "<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><u><span\n" +
 "style='font-size:14.0pt;line-height:106%'>NOTE:</span></u></b><span\n" +

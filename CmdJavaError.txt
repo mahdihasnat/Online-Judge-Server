@@ -1,7 +1,0 @@
-Solution.java:4: error: <identifier> expected
-	}fds
-	    ^
-Solution.java:5: error: reached end of file while parsing
-}
- ^
-2 errors
